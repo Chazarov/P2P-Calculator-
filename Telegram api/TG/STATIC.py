@@ -1,0 +1,1 @@
+BYBIT_URL = "https://6e3b-95-26-108-57.ngrok-free.app" #Temp!!!

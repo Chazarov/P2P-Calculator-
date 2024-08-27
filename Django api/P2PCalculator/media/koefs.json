@@ -1,0 +1,14 @@
+{
+    "BYBIT": {
+        "maker": "0.001",
+        "taker": "0.02"
+    },
+    "HTX": {
+        "maker": "0.1",
+        "taker": "0.2"
+    },
+    "BITGET": {
+        "maker": "0.0",
+        "taker": "0.0"
+    }
+}

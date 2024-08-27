@@ -1,0 +1,95 @@
+body {
+    background-color: #1a1425;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: white;
+}
+.container {
+    background-color: #000;
+    border-radius: 15px;
+    padding: 20px;
+    width: 350px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.container_main_header {
+    display: flex;
+    justify-content: center;
+    width: auto;
+    gap: 50px;
+    margin-top: 5px;
+}
+
+.container_min {
+    display: flex;
+    justify-content: center;
+    width: auto;
+    gap: 50px;
+    margin-top: 5px;
+}
+.container_min_header {
+    display: flex;
+    justify-content: center;
+    width: auto;
+    gap: 120px;
+    margin-top: 20px;
+}
+.icon-grid {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+}
+.icon-grid .icon {
+    background-color: #4d4d4d;
+    border-radius: 10%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon img {
+    width: 70%;
+}
+
+.custom_size {
+    font-size: 12px; /* размер текста */
+    padding: 5px 10px; /* отступы */
+}
+
+.custom_position_button{
+    width: 50px;
+    height: 30px;
+    border-radius: 20px;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.main_button {
+    width: 150px;
+}
+
+.small_text {
+    font-size: 8px; /* размер текста */
+}
+
+.centered_small_header {
+    text-align : center;
+    color: #5c5970;
+    font-size: 12px;
+
+}
+
+.separator {
+    color: #5c5970;
+}
+
+#status_field {
+    text-align : center;
+}
