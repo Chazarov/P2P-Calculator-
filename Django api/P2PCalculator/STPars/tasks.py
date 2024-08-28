@@ -13,8 +13,8 @@ from .ST_contexts.Bybit.STrequests import get_data as b_get_data
 from .ST_contexts.Bybit.Static import SM_NAME as B_SM_NAME
 from .ST_contexts.HTX.STrequests import get_data as h_get_data
 from .ST_contexts.HTX.Static import SM_NAME as H_SM_NAME
-from .ST_contexts.Bitget.RequestsPars.STrequests import get_data as bi_get_data
-from .ST_contexts.Bitget.RequestsPars.Static import SM_NAME as BI_SM_NAME
+from .ST_contexts.Bitget.STrequests import get_data as bi_get_data
+from .ST_contexts.Bitget.Static import SM_NAME as BI_SM_NAME
 
 
 

@@ -13,14 +13,10 @@ load_dotenv(find_dotenv())
 
 
 from .Static import TOKENS, CURRENCIES, BASE_URL, RELATIVE_URL, PREFERENCES, PAYMENTS, TRADE_ROLE, SM_NAME
-from ...BASE_STATIC import USER_NAME, PRICE, MIN_AMOUNT, USER_ID
+from ..BASE_STATIC import USER_NAME, PRICE, MIN_AMOUNT, USER_ID
 
 
-# hall-list-item-wrap hall-list  -  класс ячейки с данными
-# 
-# имя пользователя - класс list-item__nickname    
-# цена - price-shower
-# 
+
 
 
 def generate_access_sign(secret_key, timestamp, method, request_path, query_string, body):
@@ -126,31 +122,30 @@ async def get_data(session:aiohttp.ClientSession) -> dict:
 
    
 
-    async with aiohttp.ClientSession() as session:
 
-        for ROLE in TRADE_ROLES:
-            result_data[ROLEN[ROLE]] = {}
-            for CURRENCY in CURRENCIES_LIST:
-                result_data[ROLEN[ROLE]][CN[CURRENCY]] = {}
-                for TOKEN in TOKENS_LIST:
-                    result_data[ROLEN[ROLE]][CN[CURRENCY]][TN[TOKEN]] = {}
-                    for PAYMENT in PAYMENTS_LIST:
-                        result_data[ROLEN[ROLE]][CN[CURRENCY]][TN[TOKEN]][PN[PAYMENT]] = []
+    for ROLE in TRADE_ROLES:
+        result_data[ROLEN[ROLE]] = {}
+        for CURRENCY in CURRENCIES_LIST:
+            result_data[ROLEN[ROLE]][CN[CURRENCY]] = {}
+            for TOKEN in TOKENS_LIST:
+                result_data[ROLEN[ROLE]][CN[CURRENCY]][TN[TOKEN]] = {}
+                for PAYMENT in PAYMENTS_LIST:
+                    result_data[ROLEN[ROLE]][CN[CURRENCY]][TN[TOKEN]][PN[PAYMENT]] = []
 
-                        
-                        params = make_params(TOKEN, CURRENCY, PAYMENT, ROLE)
-                        query_string = urllib.parse.urlencode(params)
-                        page_data = await fetch_data(session, BASE_URL, params, headers = make_headers(query_string = query_string))
+                    
+                    params = make_params(TOKEN, CURRENCY, PAYMENT, ROLE)
+                    query_string = urllib.parse.urlencode(params)
+                    page_data = await fetch_data(session, BASE_URL, params, headers = make_headers(query_string = query_string))
 
-                        print(f"Bitget---{ROLEN[ROLE]}---{CN[CURRENCY]}---{TN[TOKEN]}---{PN[PAYMENT]}---\n")
+                    print(f"Bitget---{ROLEN[ROLE]}---{CN[CURRENCY]}---{TN[TOKEN]}---{PN[PAYMENT]}---\n")
 
-                        if not page_data:
-                            continue
-                        
-                        
-                        page_data = formed_data(page_data)
-                        
-                        result_data[ROLEN[ROLE]][CN[CURRENCY]][TN[TOKEN]][PN[PAYMENT]] += page_data
+                    if not page_data:
+                        continue
+                    
+                    
+                    page_data = formed_data(page_data)
+                    
+                    result_data[ROLEN[ROLE]][CN[CURRENCY]][TN[TOKEN]][PN[PAYMENT]] += page_data
 
     return result_data
 
