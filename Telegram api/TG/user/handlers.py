@@ -2,16 +2,12 @@ import json
 import os
 
 from aiogram import F, types, Router, Bot
-from aiogram.filters import Command, StateFilter
-from aiogram.fsm.state import StatesGroup, State
-from aiogram.types import FSInputFile, InputMediaPhoto, CallbackQuery, WebAppInfo
-from aiogram.fsm.context import FSMContext
-
-from aiogram.utils.web_app import safe_parse_webapp_init_data
-from aiohttp.web_request import Request
-from aiohttp.web_response import json_response, Response
+from aiogram.filters.command import Command
 from aiohttp import ClientSession
 
+from Contexts.Get_exchanges.Bitget.requests import get_single_ticker
+from Contexts.Get_exchanges.CBR.requests import get_single_ticker
+from Contexts.Get_exchanges.Bitget.requests import get_single_ticker
 
 from TG.user.kbds import main_menu_buttons, sub_menu_buttons
 
@@ -81,6 +77,7 @@ async def web_app_handler(web_responce:types.Message):
 @router.callback_query(F.data == USER_CALLBACKS.EXCHANGE_RATE)
 async def exchange_rate(callback: types.CallbackQuery, session:ClientSession):
     
+    await 
     text = f" "+\
     f""
     callback.message.edit_text(text = text)

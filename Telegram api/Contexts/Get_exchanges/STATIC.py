@@ -1,8 +1,8 @@
-class CURRENCIES_BLOCKCHAIN: # Здесь все к биткойну
+class CURRENCIES_BLOCKCHAIN_BTC: # Здесь все к биткойну
     USD = "USD" #!!
 
-class CURRENCIES_CBR: # Здесь все к рублю
-    USD = "USD" 
+class CURRENCIES_CBR_RUB:
+    USD = "USD" #!!
 
 class CURRENCIES_BITGET:
     USD = "USD" 
