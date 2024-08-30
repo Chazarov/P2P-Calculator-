@@ -10,22 +10,25 @@ from aiogram.fsm.context import FSMContext
 from aiogram.utils.web_app import safe_parse_webapp_init_data
 from aiohttp.web_request import Request
 from aiohttp.web_response import json_response, Response
+from aiohttp import ClientSession
 
-from TG.user.kbds import menu_buttons
-from TG.STATIC import BYBIT_URL
+
+from TG.user.kbds import main_menu_buttons, sub_menu_buttons
+
+from callbacks import USER_CALLBACKS
 
 
 bot = Bot(token = os.getenv("TOKEN"))
 router = Router()
 
 
-Bybit_web_app = WebAppInfo(url = BYBIT_URL)
 
 
 
 @router.message(Command("start"))
 async def command_start(message: types.Message):
-    await message.answer("Главное меню", reply_markup = menu_buttons())
+    await message.answer("Добро пожаловать!", reply_markup = main_menu_buttons())
+    await message.answer(text = None, reply_markup = sub_menu_buttons())
 
 
 @router.message()
@@ -58,17 +61,26 @@ async def web_app_handler(web_responce:types.Message):
 
 
     result = f"Связка {S_market} с коефициентом {koef}: \n"  +\
-    f" >>>Покупка:\n"  +\
-    f"    >>P2P Маркет {S_market} \n"  +\
-    f"    >>У пользователя {sell_username}\n" +\
-    f"    >>Слот На продажу {sell_token} за {sell_currency} по {sell_price}\n" +\
-    f"    >>Минимальная стоимость: {sell_min_amount}\n\n" +\
-    f" >>>Продажа:\n" +\
-    f"    >>P2P Маркет {S_market} \n" +\
-    f"    >>У пользователя {buy_username}\n" +\
-    f"    >>Слот На покупку {buy_token} за {buy_currency} по {buy_price}\n" +\
-    f"    >>Минимальная стоимость: {buy_min_amount}\n"
+    f" >>> Покупка:\n"  +\
+    f"    >> P2P Маркет {S_market} \n"  +\
+    f"    >> У пользователя {sell_username}\n" +\
+    f"    >> Слот На продажу {sell_token} за {sell_currency} по {sell_price}\n" +\
+    f"    >> Оплата: {buy_payment}" +\
+    f"    >> Минимальная стоимость: {sell_min_amount}\n\n" +\
+    f" >>> Продажа:\n" +\
+    f"    >> P2P Маркет {S_market} \n" +\
+    f"    >> У пользователя {buy_username}\n" +\
+    f"    >> Слот На покупку {buy_token} за {buy_currency} по {buy_price}\n" +\
+    f"    >> Оплата: {sell_payment}" +\
+    f"    >> Минимальная стоимость: {buy_min_amount}\n"
+
 
     await bot.send_message(web_responce.from_user.id, text = result)
     
 
+@router.callback_query(F.data == USER_CALLBACKS.EXCHANGE_RATE)
+async def exchange_rate(callback: types.CallbackQuery, session:ClientSession):
+    
+    text = f" "+\
+    f""
+    callback.message.edit_text(text = text)

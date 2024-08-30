@@ -8,6 +8,8 @@ from aiogram.types import BotCommand
 from dotenv import find_dotenv, load_dotenv
 load_dotenv(find_dotenv())
 
+from middlewares import AiohttpSessionMiddleware
+
 from TG.user.handlers import router as user_main_router
 
 
@@ -39,7 +41,7 @@ async def main()->None:
     dp.startup.register(on_startup)
     dp.shutdown.register(on_shutdown)
 
-
+    await dp.update.middleware(AiohttpSessionMiddleware())
     await bot.delete_webhook(drop_pending_updates = True)
     await bot.set_my_description("/start - начать работу")
     await bot.set_my_commands(commands = user_commands,scope = types.BotCommandScopeAllPrivateChats())

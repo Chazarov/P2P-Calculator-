@@ -19,19 +19,19 @@ class StparsConfig(AppConfig):
     name = 'STPars'
 
 
-    # def ready(self):
-    #     print("> > > > > > > > Start app < < < < < < < < <")
+    def ready(self):
+        print("> > > > > > > > Start app < < < < < < < < <")
 
 
-    #     if(len(THREADINGS) == 0):
+        if(len(THREADINGS) == 0):
 
-    #         thread1 = threading.Thread(target = process1)
+            thread1 = threading.Thread(target = process1)
 
-    #         thread1.start()
+            thread1.start()
             
-    #         THREADINGS.append(thread1)
+            THREADINGS.append(thread1)
 
-    #         print("\n>>>Start threads<<<\n")
+            print("\n>>>Start threads<<<\n")
         
 
     
