@@ -71,7 +71,7 @@ async def refresh_data():
         while True:
             await refresh(b_get_data, B_SM_NAME, refresh_Bybit_done, session)
             await refresh(h_get_data, H_SM_NAME, refresh_HTX_done, session)
-            await refresh(bi_get_data, BI_SM_NAME, refresh_Bitget_done, session)
+            # await refresh(bi_get_data, BI_SM_NAME, refresh_Bitget_done, session)
 
 
 
