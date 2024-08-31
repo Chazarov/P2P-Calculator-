@@ -15,7 +15,6 @@ def index(request):
 
 
 
-@csrf_exempt  # Не используем CSRF токен !!!
 def submit_parametrs(request:WSGIRequest):
 
     if request.method == 'POST':

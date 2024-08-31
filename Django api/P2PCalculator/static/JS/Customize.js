@@ -14,6 +14,23 @@ const confirm_button = document.querySelector("#main_confirm_button")
 
 
 
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+
 confirm_button.onclick = function() {
 
     const BBYBIT_T_koef_input = document.querySelector("#BYBIT_T_koef_input_field");
@@ -46,9 +63,11 @@ confirm_button.onclick = function() {
         },
     }
 
-    console.log(`❗❗${password_field.value}`)
     fetch('Customize/api/', {
         method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'), 
+        },
         body: JSON.stringify(dataToSend)
     })
     .then(response => {

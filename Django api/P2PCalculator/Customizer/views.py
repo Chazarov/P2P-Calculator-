@@ -15,7 +15,7 @@ def index(request):
     return render(request, 'Customizer/index.html', context)
 
 
-@csrf_exempt  # Не используем CSRF токен !!!
+
 def submit_parametrs(request:WSGIRequest):
 
     if request.method == 'POST':
