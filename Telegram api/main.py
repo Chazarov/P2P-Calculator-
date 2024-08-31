@@ -40,8 +40,9 @@ user_commands = [
 async def main()->None:
     dp.startup.register(on_startup)
     dp.shutdown.register(on_shutdown)
+    dp.update.middleware(AiohttpSessionMiddleware())
 
-    await dp.update.middleware(AiohttpSessionMiddleware())
+    
     await bot.delete_webhook(drop_pending_updates = True)
     await bot.set_my_description("/start - начать работу")
     await bot.set_my_commands(commands = user_commands,scope = types.BotCommandScopeAllPrivateChats())

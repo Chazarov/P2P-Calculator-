@@ -16,7 +16,7 @@ async def get_currency_rate_RUB(char_code_currency:str, session:ClientSession = 
     """
    
     async with session.get('https://www.cbr.ru/scripts/XML_daily.asp') as response:
-        text_responce = response.text()
+        text_responce = await response.text()
         get_value = ET.fromstring(text_responce).find(f"./Valute[CharCode='{char_code_currency}']/Value")
         result = get_value.text.replace(',', '.')
         return float(result)

@@ -6,12 +6,13 @@ from aiogram.filters.command import Command
 from aiohttp import ClientSession
 
 from Contexts.Get_exchanges.Bitget.requests import get_single_ticker
-from Contexts.Get_exchanges.CBR.requests import get_single_ticker
-from Contexts.Get_exchanges.Bitget.requests import get_single_ticker
+from Contexts.Get_exchanges.CBR.requests import get_currency_rate_RUB
+from Contexts.Get_exchanges.Blockchain.requests import get_curerncy_rate_BTC
+from Contexts.Get_exchanges.STATIC import PAIRS_BITGET, CURRENCIES_BLOCKCHAIN_BTC, CURRENCIES_CBR_RUB
 
-from TG.user.kbds import main_menu_buttons, sub_menu_buttons
+from TG.user.kbds import main_menu_buttons, sub_menu_buttons, exchange_rate_buttons
 
-from callbacks import USER_CALLBACKS
+from TG.callbacks import USER_CALLBACKS
 
 
 bot = Bot(token = os.getenv("TOKEN"))
@@ -24,7 +25,7 @@ router = Router()
 @router.message(Command("start"))
 async def command_start(message: types.Message):
     await message.answer("Добро пожаловать!", reply_markup = main_menu_buttons())
-    await message.answer(text = None, reply_markup = sub_menu_buttons())
+    await message.answer(text = " _ ", reply_markup = sub_menu_buttons())
 
 
 @router.message()
@@ -74,10 +75,20 @@ async def web_app_handler(web_responce:types.Message):
     await bot.send_message(web_responce.from_user.id, text = result)
     
 
+@router.callback_query(F.data == USER_CALLBACKS.UPDATE_EXCHANGE_RATE)
 @router.callback_query(F.data == USER_CALLBACKS.EXCHANGE_RATE)
 async def exchange_rate(callback: types.CallbackQuery, session:ClientSession):
     
-    await 
-    text = f" "+\
-    f""
-    callback.message.edit_text(text = text)
+    btcusdt = await get_single_ticker(pair = PAIRS_BITGET.BTCUSDT ,session = session)
+    rubusd = await get_currency_rate_RUB(char_code_currency = CURRENCIES_CBR_RUB.USD, session = session)
+    btcusd = await get_curerncy_rate_BTC(char_code_currency = CURRENCIES_BLOCKCHAIN_BTC.USD, session = session)
+
+    btcusdt = btcusdt if btcusdt != None else "-"
+    rubusd = rubusd if rubusd != None else "-"
+    btcusd = btcusd if btcusd != None else "-"
+
+    text = (f" 💱Текущий курс: \n\n"+\
+        f" ➡️ BTC/USDT: {btcusdt}\n"+\
+        f" ➡️ RUB/USD: {rubusd}\n"+\
+        f" ➡️ BTC/USD: {btcusd}\n")
+    await callback.message.edit_text(text = text, reply_markup = exchange_rate_buttons())

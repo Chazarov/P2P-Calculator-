@@ -1,16 +1,20 @@
+from typing import Any, Awaitable, Callable, Dict
+
 import aiohttp
 from aiogram import types
-from aiogram.dispatcher.middlewares import BaseMiddleware
+from aiogram import BaseMiddleware
+
+
+
+
 
 class AiohttpSessionMiddleware(BaseMiddleware):
-    def __init__(self):
-        super().__init__()
-
-    async def on_pre_process_update(self, update: types.Update, data: dict):
-        session = aiohttp.ClientSession()
-        data['session'] = session
-
-    async def on_post_process_update(self, update: types.Update, result, data: dict):
-        session: aiohttp.ClientSession = data.get('session')
-        if session:
-            await session.close()
+    async def __call__(
+            self,
+            handler: Callable[[types.TelegramObject, Dict[str, Any]], Awaitable[Any]],
+            event: types.TelegramObject,
+            data: Dict[str, Any],
+    ) -> Any:
+        async with aiohttp.ClientSession() as session:
+            data['session'] = session
+            return await handler(event, data)
