@@ -3,7 +3,7 @@ import aiohttp
 import json
 
 from .Static import TOKENS, CURRENCIES, BASE_URL, PREFERENCES, PAYMENTS, TRADE_ROLE, SM_NAME
-from ..BASE_STATIC import USER_NAME, PRICE, MIN_AMOUNT, USER_ID
+from ..BASE_STATIC import USER_NAME, PRICE, MIN_AMOUNT, USER_ID, ADV_ID
 
 
 
@@ -96,6 +96,7 @@ def formed_data(data:dict) -> dict:
             result_data[i][PRICE] = data[i].get("price")
             result_data[i][MIN_AMOUNT] = data[i].get("minAmount")
             result_data[i][USER_ID] = data[i].get("userId")
+            result_data[i][ADV_ID] = data[i].get("id")
         except Exception as e:
             print(">>>Unpack request data Exception:  " + str(e) + "\n\n")
     return result_data
