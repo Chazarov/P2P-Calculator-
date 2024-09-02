@@ -45,6 +45,7 @@ async def web_app_handler(web_responce:types.Message):
     buy_token = data["buy"]["token"]
     buy_min_amount = data["buy"]["min_amount"]
     buy_price = data["buy"]["price"]
+    buy_adv_id = data["buy"]["adv_id"]
 
     sell_username = data["sell"]["userName"]
     sell_payment = data["sell"]["payment"]
@@ -52,6 +53,7 @@ async def web_app_handler(web_responce:types.Message):
     sell_token = data["sell"]["token"]
     sell_min_amount = data["sell"]["min_amount"]
     sell_price = data["sell"]["price"]
+    sell_adv_id = data["sell"]["adv_id"]
 
 
 
@@ -64,12 +66,14 @@ async def web_app_handler(web_responce:types.Message):
     f"    >> Слот На продажу {sell_token} за {sell_currency} по {sell_price}\n" +\
     f"    >> Оплата: {buy_payment}" +\
     f"    >> Минимальная стоимость: {sell_min_amount}\n\n" +\
+    f"    >> id Ордера: {buy_adv_id}\n\n" +\
     f" >>> Продажа:\n" +\
     f"    >> P2P Маркет {S_market} \n" +\
     f"    >> У пользователя {buy_username}\n" +\
     f"    >> Слот На покупку {buy_token} за {buy_currency} по {buy_price}\n" +\
     f"    >> Оплата: {sell_payment}" +\
     f"    >> Минимальная стоимость: {buy_min_amount}\n"
+    f"    >> id Ордера: {sell_adv_id}\n\n"
 
 
     await bot.send_message(web_responce.from_user.id, text = result)
