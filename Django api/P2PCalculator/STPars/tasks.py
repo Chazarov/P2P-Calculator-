@@ -30,22 +30,18 @@ refresh_Bitget_done = [True]
 refresh_lock = asyncio.Lock()
 
 
-print("P2PCalculator/tasks/ ind debug 1\n")
+
 
 
 async def get_current_data():
-    print("P2PCalculator/tasks/ ind debug 2\n")
     async with aiofiles.open(FILE_PATH, "r", encoding='utf-8') as file:
         content = await file.read()
-        print("P2PCalculator/tasks/ ind debug 3\n")
         return json.loads(content)
     
 async def write_current_data(data):
 
     async with aiofiles.open(FILE_PATH, 'w', encoding='utf-8') as file:
-        print("P2PCalculator/tasks/ ind debug 4\n")
         await file.write(json.dumps(data, ensure_ascii=False, indent=4))
-        print("P2PCalculator/tasks/ ind debug 5\n")
 
 
 
@@ -69,9 +65,10 @@ async def refresh(refresh_function, SM_NAME:str, flag:list, session:aiohttp.Clie
 async def refresh_data():
     async with aiohttp.ClientSession() as session:
         while True:
+            await refresh(bi_get_data, BI_SM_NAME, refresh_Bitget_done, session)
             await refresh(b_get_data, B_SM_NAME, refresh_Bybit_done, session)
             await refresh(h_get_data, H_SM_NAME, refresh_HTX_done, session)
-            # await refresh(bi_get_data, BI_SM_NAME, refresh_Bitget_done, session)
+            
 
 
 

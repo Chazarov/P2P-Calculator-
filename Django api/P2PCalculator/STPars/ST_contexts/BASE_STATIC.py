@@ -3,6 +3,7 @@ USER_NAME = "user_name"
 USER_ID = "user_id"
 PRICE = "price"
 MIN_AMOUNT = "min_amount"
+ADV_ID = "adv_id"
 
 
 

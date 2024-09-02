@@ -26,7 +26,7 @@ def make_payload(token: str, currency: str, payment: str, trade_role:str, page: 
 async def fetch_data(session, url, payload):
     async with session.post(url, json=payload) as response:
         if response.status != 200:
-            print(f"Bybit Error: status-code {response.status}")
+            print(f"Bybit Error: status-code {response.status}\n reason: {response.reason}\n content: {response.content}\n")
             return None
 
         response_json = await response.json()
@@ -78,7 +78,7 @@ async def get_data(session:aiohttp.ClientSession) -> dict:
                         if not page_data:
                             continue
                         
-                        print(f"Bybit---{ROLEN[ROLE]}---{CN[CURRENCY]}---{TN[TOKEN]}---{PN[PAYMENT]}---{pages_count}\n")
+                        # print(f"Bybit---{ROLEN[ROLE]}---{CN[CURRENCY]}---{TN[TOKEN]}---{PN[PAYMENT]}---{pages_count}\n")
                         page_data = formed_data(page_data)
                         
                         pages_count += 1

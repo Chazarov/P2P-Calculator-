@@ -13,7 +13,7 @@ load_dotenv(find_dotenv())
 
 
 from .Static import TOKENS, CURRENCIES, BASE_URL, RELATIVE_URL, PREFERENCES, PAYMENTS, TRADE_ROLE, SM_NAME
-from ..BASE_STATIC import USER_NAME, PRICE, MIN_AMOUNT, USER_ID
+from ..BASE_STATIC import USER_NAME, PRICE, MIN_AMOUNT, USER_ID, ADV_ID
 
 
 
@@ -54,16 +54,18 @@ def make_headers(query_string:str):
 def make_params(token: str, currency: str, payment: str, trade_role:str) -> dict:
 
     current_time = int(time.time() * 1000)
-    start_time = current_time - 60 * 1000
+    start_time = current_time - 7 * 24 * 60 * 1000
 
 
     params = {
         "startTime" : str(start_time),
-        # "type" : str(trade_role),
-        # "coin" : str(token),
-        # "fiat" : str(currency),
-        # "payMethodId" : str(payment),
-        "pageSize" : str(PREFERENCES.NUMBER_OF_UNITS_PER_PAGE),   
+        "side" : str(trade_role),
+        "coin" : str(token),
+        "language" : "en-US",
+        "fiat" : str(currency),
+        "payMethodId" : str(payment),
+        "sourceType" : "competitior",
+        "pageSize" : str(PREFERENCES.NUMBER_OF_UNITS_PER_PAGE),    
     }
 
     return params
@@ -76,9 +78,7 @@ async def fetch_data(session:aiohttp.ClientSession, url, params, headers):
     async with session.get(url, params = params, headers = headers) as response:
         
         if response.status != 200:
-            print(f"Bitget Error: status-code {response.status}")
-            print(f"Bitget Error: reason {response.reason}")
-            print(f"Bitget Error: reason {response.content}")
+            print(f"Bitget Error: status-code {response.status}\n reason: {response.reason}\n content: {response.content}\n")
 
             try:
                 response_json = await response.json()
@@ -94,10 +94,8 @@ async def fetch_data(session:aiohttp.ClientSession, url, params, headers):
             ret_msg = response_json.get("msg", "Unknown error")
             print(f"Ошибка: {ret_msg}")
             return None
-        
-        print(response_json)
 
-    return response_json.get("data").get("merchantList")
+    return response_json.get("data").get("advList")
 
 
 
@@ -135,9 +133,11 @@ async def get_data(session:aiohttp.ClientSession) -> dict:
                     
                     params = make_params(TOKEN, CURRENCY, PAYMENT, ROLE)
                     query_string = urllib.parse.urlencode(params)
+
+                    # print(f"Bitget---{ROLEN[ROLE]}---{CN[CURRENCY]}---{TN[TOKEN]}---{PN[PAYMENT]}---\n")
                     page_data = await fetch_data(session, BASE_URL, params, headers = make_headers(query_string = query_string))
 
-                    print(f"Bitget---{ROLEN[ROLE]}---{CN[CURRENCY]}---{TN[TOKEN]}---{PN[PAYMENT]}---\n")
+                    
 
                     if not page_data:
                         continue
@@ -156,10 +156,11 @@ def formed_data(data:dict) -> dict:
     for i in range(len(data)):
         result_data.append({})
         try:
-            result_data[i][USER_NAME] = data[i].get("nickName")
+            result_data[i][USER_NAME] = data[i].get("merchantCertifiedResult")
             result_data[i][PRICE] = data[i].get("price")
-            result_data[i][MIN_AMOUNT] = data[i].get("minAmount")
+            result_data[i][MIN_AMOUNT] = data[i].get("minTradeAmount")
             result_data[i][USER_ID] = data[i].get("userId")
+            result_data[i][ADV_ID] = data[i].get("advId")
 
         except Exception as e:
             print(">>>Unpack request data Exception:  " + str(e) + "\n\n")

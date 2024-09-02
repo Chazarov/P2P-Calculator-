@@ -37,19 +37,14 @@ def make_params(token: str, currency: str, payment: str, trade_role:str, page: i
 async def fetch_page(session, url, params):
 
     async with session.get(url, params=params) as response:
-        
-        content_type = response.headers.get('Content-Type', '')
-
-        if 'application/json' not in content_type:
-            text = await response.text()
-            print(f"Unexpected content type: {content_type}")
-            print(f"Response text: {text}")
+        if response.status != 200:
+            print(f"HTX Error: status-code {response.status}\n reason: {response.reason}\n content: {response.content}\n")
             return None
 
         response_json = await response.json()
         if response.status != 200 or response_json.get("code") != 200:
+            print(f"HTX Error: status-code {response.status}\n reason: {response.reason}\n content: {response.content}\n")
             ret_msg = response_json.get("message", "Unknown error")
-            print(f"HTX Error: {response.status}\n {ret_msg}")
             return None
 
         return response_json.get("data", [])
@@ -85,7 +80,7 @@ async def get_data(session:aiohttp.ClientSession)->dict:
                         if not page_data:
                             continue
 
-                        print(f"HTX---{ROLEN[ROLE]}---{CN[CURRENCY]}---{TN[TOKEN]}---{PN[PAYMENT]}---{pages_count}\n")
+                        # print(f"HTX---{ROLEN[ROLE]}---{CN[CURRENCY]}---{TN[TOKEN]}---{PN[PAYMENT]}---{pages_count}\n")
                         page_data = formed_data(page_data)
                         
                         result_data[ROLEN[ROLE]][CN[CURRENCY]][TN[TOKEN]][PN[PAYMENT]] += page_data

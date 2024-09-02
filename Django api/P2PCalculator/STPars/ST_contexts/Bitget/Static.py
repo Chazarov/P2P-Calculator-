@@ -1,14 +1,14 @@
 SM_NAME = "BITGET"
-BASE_URL = "https://api.bitget.com/api/p2p/v1/merchant/orderList"
-RELATIVE_URL = "/api/p2p/v1/merchant/orderList"
+BASE_URL = "https://api.bitget.com/api/v2/p2p/advList"
+RELATIVE_URL = "/api/v2/p2p/advList"
 
 
 
 
 
 class TRADE_ROLE:
-    SELL = "sell"
-    BUY = "buy"
+    SELL = "Sell"
+    BUY = "Buy"
     @classmethod
     def to_list(cls):
         return [value for key, value in cls.__dict__.items() if isinstance(value, str) and not key.startswith("__")]
