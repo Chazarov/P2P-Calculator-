@@ -123,9 +123,12 @@ def processing_data(params:dict)->dict:
     best_offers = {payment:{} for payment in PAYMENTS_LIST}
 
     for PAYMENT in PAYMENTS_LIST:
-        buy_filtered_offers = list(filter(lambda x: float(x['min_amount']) <= buy_min_amount, buy_payments[PAYMENT]))
-        sell_filtered_offers = list(filter(lambda x: float(x['min_amount']) <= sell_min_amount, sell_payments[PAYMENT]))
-
+        try:
+            buy_filtered_offers = list(filter(lambda x: float(x['min_amount']) <= buy_min_amount, buy_payments[PAYMENT]))
+            sell_filtered_offers = list(filter(lambda x: float(x['min_amount']) <= sell_min_amount, sell_payments[PAYMENT]))
+        except Exception as e:
+            buy_filtered_offers = []
+            sell_filtered_offers = []
 
         if(len(buy_filtered_offers) == 0): best_offers[PAYMENT]["buy"] = None
         else:best_offers[PAYMENT]["buy"] = max(buy_filtered_offers, key=lambda x: float(x["price"]))
@@ -175,6 +178,7 @@ def processing_data(params:dict)->dict:
                         "min_amount":best_offers[PAYMENTS_LIST[buy_idx]]["buy"]["min_amount"],
                         "userName":best_offers[PAYMENTS_LIST[buy_idx]]["buy"]["user_name"],
                         "price":best_offers[PAYMENTS_LIST[buy_idx]]["buy"]["price"],
+                        "adv_id":best_offers[PAYMENTS_LIST[buy_idx]]["buy"]["adv_id"],
                     },
                     "sell":{
                         "payment":PAYMENTS_LIST[sell_idx],
@@ -183,6 +187,7 @@ def processing_data(params:dict)->dict:
                         "min_amount":best_offers[PAYMENTS_LIST[sell_idx]]["sell"]["min_amount"],
                         "userName":best_offers[PAYMENTS_LIST[sell_idx]]["sell"]["user_name"],
                         "price":best_offers[PAYMENTS_LIST[sell_idx]]["sell"]["price"],
+                        "adv_id":best_offers[PAYMENTS_LIST[sell_idx]]["sell"]["adv_id"],
                     },
                 }
                 ceils.append(ceil_data)

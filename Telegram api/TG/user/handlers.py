@@ -32,7 +32,6 @@ async def command_start(message: types.Message):
 async def web_app_handler(web_responce:types.Message):
 
     data = json.loads(web_responce.web_app_data.data)
-    print(data)
 
    
     koef = data["koef"]
@@ -64,16 +63,16 @@ async def web_app_handler(web_responce:types.Message):
     f"    >> P2P Маркет {S_market} \n"  +\
     f"    >> У пользователя {sell_username}\n" +\
     f"    >> Слот На продажу {sell_token} за {sell_currency} по {sell_price}\n" +\
-    f"    >> Оплата: {buy_payment}" +\
-    f"    >> Минимальная стоимость: {sell_min_amount}\n\n" +\
+    f"    >> Оплата: {buy_payment}\n" +\
+    f"    >> Минимальная стоимость: {sell_min_amount}\n" +\
     f"    >> id Ордера: {buy_adv_id}\n\n" +\
     f" >>> Продажа:\n" +\
     f"    >> P2P Маркет {S_market} \n" +\
     f"    >> У пользователя {buy_username}\n" +\
     f"    >> Слот На покупку {buy_token} за {buy_currency} по {buy_price}\n" +\
-    f"    >> Оплата: {sell_payment}" +\
-    f"    >> Минимальная стоимость: {buy_min_amount}\n"
-    f"    >> id Ордера: {sell_adv_id}\n\n"
+    f"    >> Оплата: {sell_payment}\n" +\
+    f"    >> Минимальная стоимость: {buy_min_amount}\n" +\
+    f"    >> id Ордера: {sell_adv_id}\n"
 
 
     await bot.send_message(web_responce.from_user.id, text = result)
