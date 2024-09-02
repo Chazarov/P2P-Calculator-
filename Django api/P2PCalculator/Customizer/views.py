@@ -7,7 +7,7 @@ from django.core.handlers.wsgi import WSGIRequest
 
 from .processing import refresh_koefs, get_current_coefs
 
-
+@csrf_exempt
 def index(request):
 
     context = get_current_coefs()
@@ -15,7 +15,7 @@ def index(request):
     return render(request, 'Customizer/index.html', context)
 
 
-
+@csrf_exempt
 def submit_parametrs(request:WSGIRequest):
 
     if request.method == 'POST':

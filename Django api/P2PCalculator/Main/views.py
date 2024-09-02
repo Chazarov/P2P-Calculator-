@@ -14,7 +14,7 @@ def index(request):
     return render(request, 'Main/index.html')
 
 
-
+@csrf_exempt
 def submit_parametrs(request:WSGIRequest):
 
     if request.method == 'POST':
