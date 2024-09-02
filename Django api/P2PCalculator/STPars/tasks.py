@@ -19,6 +19,9 @@ from .ST_contexts.Bitget.Static import SM_NAME as BI_SM_NAME
 
 
 
+finish_thread = [False]
+
+
 
 FILE_PATH = Path(settings.MEDIA_ROOT).joinpath(SM_DATA_FILE_NAME)
 

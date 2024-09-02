@@ -10,8 +10,24 @@ from STPars.tasks import refresh_data
 THREADINGS = []
 
 
+
+def starting_a_stream():
+
+    thread1 = threading.Thread(target = process1)
+    thread1.start()
+    
+    THREADINGS = []
+    THREADINGS.append(thread1)
+
+    print("\n>>>Start threads<<<\n")
+
+
+
 def process1():
     asyncio.run(refresh_data())
+
+
+
 
 
 class StparsConfig(AppConfig):
@@ -19,19 +35,12 @@ class StparsConfig(AppConfig):
     name = 'STPars'
 
 
+
     def ready(self):
         print("> > > > > > > > Start app < < < < < < < < <")
 
-
         if(len(THREADINGS) == 0):
-
-            thread1 = threading.Thread(target = process1)
-
-            thread1.start()
-            
-            THREADINGS.append(thread1)
-
-            print("\n>>>Start threads<<<\n")
+            starting_a_stream()
         
 
     

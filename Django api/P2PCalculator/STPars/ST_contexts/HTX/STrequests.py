@@ -36,7 +36,7 @@ def make_params(token: str, currency: str, payment: str, trade_role:str, page: i
 
 async def fetch_page(session, url, params):
 
-    async with session.get(url, params=params) as response:
+    async with session.get(url, params=params, timeout=aiohttp.ClientTimeout(total=PREFERENCES.TIMEOUT)) as response:
         if response.status != 200:
             print(f"HTX Error: status-code {response.status}\n reason: {response.reason}\n content: {response.content}\n")
             return None
@@ -54,7 +54,7 @@ async def get_data(session:aiohttp.ClientSession)->dict:
 
 
     result_data = {}
-    
+
     CURRENCIES_LIST = CURRENCIES.to_list()
     TOKENS_LIST = TOKENS.to_list()
     PAYMENTS_LIST = PAYMENTS.to_list()
@@ -80,15 +80,17 @@ async def get_data(session:aiohttp.ClientSession)->dict:
                     while pages_count <= PREFERENCES.NUMBER_OF_PAGES_TO_PARSE:
                         params = make_params(TOKEN, CURRENCY, PAYMENT, ROLE, pages_count)
                         page_data = await fetch_page(session, BASE_URL, params)
-                        
+
+                        pages_count += 1
+                        await asyncio.sleep(PREFERENCES.UPDATE_RATE)
                         if not page_data:
                             continue
 
-                        # print(f"HTX---{ROLEN[ROLE]}---{CN[CURRENCY]}---{TN[TOKEN]}---{PN[PAYMENT]}---{pages_count}\n")
+                        print(f"HTX---{ROLEN[ROLE]}---{CN[CURRENCY]}---{TN[TOKEN]}---{PN[PAYMENT]}---{pages_count}")
                         page_data = formed_data(page_data)
                         
                         result_data[ROLEN[ROLE]][CN[CURRENCY]][TN[TOKEN]][PN[PAYMENT]] += page_data
-                        pages_count += 1
+                        
 
     return result_data
 

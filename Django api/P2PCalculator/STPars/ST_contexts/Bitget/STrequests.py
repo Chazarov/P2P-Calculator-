@@ -1,5 +1,6 @@
 import time
 import json
+import asyncio
 import os
 import hashlib
 import hmac
@@ -13,7 +14,7 @@ load_dotenv(find_dotenv())
 
 
 from .Static import TOKENS, CURRENCIES, BASE_URL, RELATIVE_URL, PREFERENCES, PAYMENTS, TRADE_ROLE, SM_NAME
-from ..BASE_STATIC import USER_NAME, PRICE, MIN_AMOUNT, USER_ID, ADV_ID
+from ..BASE_STATIC import USER_NAME, PRICE, MIN_AMOUNT, USER_ID, ADV_ID 
 
 
 
@@ -75,7 +76,7 @@ def make_params(token: str, currency: str, payment: str, trade_role:str) -> dict
 async def fetch_data(session:aiohttp.ClientSession, url, params, headers):
 
     
-    async with session.get(url, params = params, headers = headers) as response:
+    async with session.get(url, params = params, headers = headers, timeout=aiohttp.ClientTimeout(total=PREFERENCES.TIMEOUT)) as response:
         
         if response.status != 200:
             print(f"Bitget Error: status-code {response.status}\n reason: {response.reason}\n content: {response.content}\n")
@@ -133,11 +134,11 @@ async def get_data(session:aiohttp.ClientSession) -> dict:
                     params = make_params(TOKEN, CURRENCY, PAYMENT, ROLE)
                     query_string = urllib.parse.urlencode(params)
 
-                    # print(f"Bitget---{ROLEN[ROLE]}---{CN[CURRENCY]}---{TN[TOKEN]}---{PN[PAYMENT]}---\n")
+                    print(f"Bitget---{ROLEN[ROLE]}---{CN[CURRENCY]}---{TN[TOKEN]}---{PN[PAYMENT]}---")
                     page_data = await fetch_data(session, BASE_URL, params, headers = make_headers(query_string = query_string))
 
                     
-
+                    await asyncio.sleep(PREFERENCES.UPDATE_RATE)
                     if not page_data:
                         continue
                     

@@ -1,6 +1,7 @@
 import asyncio
 import aiohttp
 import json
+import asyncio
 
 from .Static import TOKENS, CURRENCIES, BASE_URL, PREFERENCES, PAYMENTS, TRADE_ROLE, SM_NAME
 from ..BASE_STATIC import USER_NAME, PRICE, MIN_AMOUNT, USER_ID, ADV_ID
@@ -24,7 +25,7 @@ def make_payload(token: str, currency: str, payment: str, trade_role:str, page: 
     return payload
 
 async def fetch_data(session, url, payload):
-    async with session.post(url, json=payload) as response:
+    async with session.post(url, json=payload, timeout=aiohttp.ClientTimeout(total=PREFERENCES.TIMEOUT)) as response:
         if response.status != 200:
             print(f"Bybit Error: status-code {response.status}\n reason: {response.reason}\n content: {response.content}\n")
             return None
@@ -75,13 +76,15 @@ async def get_data(session:aiohttp.ClientSession) -> dict:
                         payload = make_payload(TOKEN, CURRENCY, PAYMENT, ROLE, pages_count)
                         page_data = await fetch_data(session, BASE_URL, payload)
 
+                        pages_count += 1
+                        await asyncio.sleep(PREFERENCES.UPDATE_RATE)
                         if not page_data:
                             continue
                         
-                        # print(f"Bybit---{ROLEN[ROLE]}---{CN[CURRENCY]}---{TN[TOKEN]}---{PN[PAYMENT]}---{pages_count}\n")
+                        print(f"Bybit---{ROLEN[ROLE]}---{CN[CURRENCY]}---{TN[TOKEN]}---{PN[PAYMENT]}---{pages_count}")
                         page_data = formed_data(page_data)
                         
-                        pages_count += 1
+                        
                         result_data[ROLEN[ROLE]][CN[CURRENCY]][TN[TOKEN]][PN[PAYMENT]] += page_data
 
     return result_data

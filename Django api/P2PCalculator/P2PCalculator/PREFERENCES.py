@@ -1,5 +1,5 @@
-# The interval for updating (parsing) data from the sites (In minutes)
-UPDATE_RATE = 60*2
+# The interval for module updating (parsing) data from the sites (In seconds)
+UPDATE_RATE = 3
 
 SM_DATA_FILE_NAME = "STData.json"
 
