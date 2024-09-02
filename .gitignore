@@ -1,3 +1,6 @@
 **.env
 **__pycache__
+**koefs.json
+**STData.json
+
 **draft.py

@@ -78,17 +78,32 @@ async def web_app_handler(web_responce:types.Message):
 @router.callback_query(F.data == USER_CALLBACKS.UPDATE_EXCHANGE_RATE)
 @router.callback_query(F.data == USER_CALLBACKS.EXCHANGE_RATE)
 async def exchange_rate(callback: types.CallbackQuery, session:ClientSession):
-    
+
+    async def edit_text(message:types.Message, text:str):
+        if(message.text != text):
+            await message.edit_text(text = text, reply_markup = exchange_rate_buttons())
+
+    btcusdt = "-"
+    rubusd = "-"
+    btcusd = "-"
+
     btcusdt = await get_single_ticker(pair = PAIRS_BITGET.BTCUSDT ,session = session)
-    rubusd = await get_currency_rate_RUB(char_code_currency = CURRENCIES_CBR_RUB.USD, session = session)
-    btcusd = await get_curerncy_rate_BTC(char_code_currency = CURRENCIES_BLOCKCHAIN_BTC.USD, session = session)
-
-    btcusdt = btcusdt if btcusdt != None else "-"
-    rubusd = rubusd if rubusd != None else "-"
-    btcusd = btcusd if btcusd != None else "-"
-
     text = (f" 💱Текущий курс: \n\n"+\
         f" ➡️ BTC/USDT: {btcusdt}\n"+\
         f" ➡️ RUB/USD: {rubusd}\n"+\
         f" ➡️ BTC/USD: {btcusd}\n")
-    await callback.message.edit_text(text = text, reply_markup = exchange_rate_buttons())
+    await edit_text(message = callback.message, text = text)
+
+    rubusd = await get_currency_rate_RUB(char_code_currency = CURRENCIES_CBR_RUB.USD, session = session)
+    text = (f" 💱Текущий курс: \n\n"+\
+        f" ➡️ BTC/USDT: {btcusdt}\n"+\
+        f" ➡️ RUB/USD: {rubusd}\n"+\
+        f" ➡️ BTC/USD: {btcusd}\n")
+    await edit_text(message = callback.message, text = text)
+    
+    btcusd = await get_curerncy_rate_BTC(char_code_currency = CURRENCIES_BLOCKCHAIN_BTC.USD, session = session)
+    text = (f" 💱Текущий курс: \n\n"+\
+        f" ➡️ BTC/USDT: {btcusdt}\n"+\
+        f" ➡️ RUB/USD: {rubusd}\n"+\
+        f" ➡️ BTC/USD: {btcusd}\n")
+    await edit_text(message = callback.message, text = text)

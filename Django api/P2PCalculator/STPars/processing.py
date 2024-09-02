@@ -154,12 +154,12 @@ def processing_data(params:dict)->dict:
                     "exists": "false"
                 }
             else:
-                
+
                 buy_am = float(buy_item.get("price"))
                 sell_am = float(sell_item.get("price"))
 
-                buy_am = buy_am + buy_am*comission_buy
-                sell_am = sell_am - sell_am*comission_sell
+                buy_am = buy_am - buy_am*comission_buy
+                sell_am = sell_am + sell_am*comission_sell
             
                 koef = round(buy_am/sell_am, 2)
 
