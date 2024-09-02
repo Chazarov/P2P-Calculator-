@@ -110,7 +110,6 @@ async def get_data(session:aiohttp.ClientSession) -> dict:
     TRADE_ROLES = TRADE_ROLE.to_list()
 
 
-    print(PAYMENTS_LIST)
 
     # Dictionaries with parameter names for easy perception
     CN = CURRENCIES.to_dict()

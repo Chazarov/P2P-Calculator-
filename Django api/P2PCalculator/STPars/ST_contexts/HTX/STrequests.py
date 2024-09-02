@@ -50,7 +50,11 @@ async def fetch_page(session, url, params):
         return response_json.get("data", [])
 
 async def get_data(session:aiohttp.ClientSession)->dict:
+
+
+
     result_data = {}
+    
     CURRENCIES_LIST = CURRENCIES.to_list()
     TOKENS_LIST = TOKENS.to_list()
     PAYMENTS_LIST = PAYMENTS.to_list()
