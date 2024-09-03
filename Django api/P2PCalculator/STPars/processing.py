@@ -190,7 +190,8 @@ def processing_data(params:dict)->dict:
                         "adv_id":best_offers[PAYMENTS_LIST[sell_idx]]["sell"]["adv_id"],
                     },
                 }
-                ceils.append(ceil_data)
+
+            ceils.append(ceil_data)
             count += 1
 
     result_data['ceils'] = ceils

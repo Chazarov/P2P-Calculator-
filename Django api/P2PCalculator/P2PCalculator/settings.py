@@ -1,5 +1,4 @@
 import os
-from corsheaders.defaults import default_headers
 
 """
 Django settings for P2PCalculator project.
@@ -32,13 +31,8 @@ SECRET_KEY = 'django-insecure-_^b5odqiu#$d(0_mt&93n5=v4xnw1jv16t-zch=*wj-u&10ue6
 DEBUG = True
 
 
-ALLOWED_HOSTS = ["9dba-193-33-153-73.ngrok-free.app", "127.0.0.1"]
+ALLOWED_HOSTS = ["7abd-193-33-153-73.ngrok-free.app", "127.0.0.1"]
 
-
-# Cors allowed permissions
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    'SPECIAL_PASS',
-]
 
 
 # Application definition
@@ -50,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
     'Main',
     'STPars',
     'Customizer',
@@ -64,7 +57,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'P2PCalculator.urls'
