@@ -67,13 +67,12 @@ async def refresh(refresh_function, SM_NAME:str, flag:list, session:aiohttp.Clie
 
 async def refresh_data():
     async with aiohttp.ClientSession() as session:
-        while True:
-            await refresh(bi_get_data, BI_SM_NAME, refresh_Bitget_done, session)
-            print(">> Bitget update completed <<")
-            await refresh(b_get_data, B_SM_NAME, refresh_Bybit_done, session)
-            print(">> Bybit update completed <<")
-            await refresh(h_get_data, H_SM_NAME, refresh_HTX_done, session)
-            print(">> HTX update completed <<")
+        await refresh(bi_get_data, BI_SM_NAME, refresh_Bitget_done, session)
+        print(">> Bitget update completed <<")
+        await refresh(b_get_data, B_SM_NAME, refresh_Bybit_done, session)
+        print(">> Bybit update completed <<")
+        await refresh(h_get_data, H_SM_NAME, refresh_HTX_done, session)
+        print(">> HTX update completed <<")
             
 
 
