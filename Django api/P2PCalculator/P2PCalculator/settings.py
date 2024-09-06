@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'Main',
     'STPars',
     'Customizer',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -136,4 +137,11 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672/'
+
+
+# Celery 
+CELERY_CACHE_BACKEND = 'default'
+
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672'
+
+CELERY_RESULT_BACKEND = 'django-db'
