@@ -35,7 +35,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\MY projects\Work\Python\P2P calculator\Django api\.venv"
+VIRTUAL_ENV="C:\MY projects\Work\Python\P2P calculator\Clean development\P2P Calculator\Django api\P2PCalculator\.venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

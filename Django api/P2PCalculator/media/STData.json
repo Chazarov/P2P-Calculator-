@@ -18974,438 +18974,79 @@
                     "Raiffaizen": [
                         {
                             "user_name": null,
-                            "price": "92.39",
-                            "min_amount": "5000",
+                            "price": "92.8",
+                            "min_amount": "15000",
                             "user_id": null,
-                            "adv_id": "1150049"
+                            "adv_id": "1169480"
                         },
                         {
                             "user_name": null,
-                            "price": "92.39",
-                            "min_amount": "5000",
+                            "price": "92.8",
+                            "min_amount": "15000",
                             "user_id": null,
-                            "adv_id": "1150049"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.4",
-                            "min_amount": "8000",
-                            "user_id": null,
-                            "adv_id": "1149224"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.4",
-                            "min_amount": "8000",
-                            "user_id": null,
-                            "adv_id": "1149224"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "109",
-                            "min_amount": "100",
-                            "user_id": null,
-                            "adv_id": "1149167"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "94",
-                            "min_amount": "100",
-                            "user_id": null,
-                            "adv_id": "1149145"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "94",
-                            "min_amount": "100",
-                            "user_id": null,
-                            "adv_id": "1149145"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "94",
-                            "min_amount": "100",
-                            "user_id": null,
-                            "adv_id": "1149145"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "94",
-                            "min_amount": "100",
-                            "user_id": null,
-                            "adv_id": "1149145"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "94",
-                            "min_amount": "100",
-                            "user_id": null,
-                            "adv_id": "1149145"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "94",
-                            "min_amount": "100",
-                            "user_id": null,
-                            "adv_id": "1149145"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "94",
-                            "min_amount": "100",
-                            "user_id": null,
-                            "adv_id": "1149145"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "94",
-                            "min_amount": "100",
-                            "user_id": null,
-                            "adv_id": "1149145"
+                            "adv_id": "1169480"
                         }
                     ],
-                    "SBP": [
-                        {
-                            "user_name": null,
-                            "price": "92.5",
-                            "min_amount": "5000",
-                            "user_id": null,
-                            "adv_id": "1150071"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.4",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149956"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92",
-                            "min_amount": "50000",
-                            "user_id": null,
-                            "adv_id": "1149881"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.2",
-                            "min_amount": "682.28",
-                            "user_id": null,
-                            "adv_id": "1149866"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.29",
-                            "min_amount": "25000",
-                            "user_id": null,
-                            "adv_id": "1149662"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.29",
-                            "min_amount": "25000",
-                            "user_id": null,
-                            "adv_id": "1149662"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.29",
-                            "min_amount": "25000",
-                            "user_id": null,
-                            "adv_id": "1149662"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "93",
-                            "min_amount": "2500",
-                            "user_id": null,
-                            "adv_id": "1149620"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "93",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149480"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.4",
-                            "min_amount": "10000",
-                            "user_id": null,
-                            "adv_id": "1149463"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92",
-                            "min_amount": "81250",
-                            "user_id": null,
-                            "adv_id": "1149301"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92",
-                            "min_amount": "81250",
-                            "user_id": null,
-                            "adv_id": "1149301"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92",
-                            "min_amount": "81250",
-                            "user_id": null,
-                            "adv_id": "1149301"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92",
-                            "min_amount": "100000",
-                            "user_id": null,
-                            "adv_id": "1149278"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92",
-                            "min_amount": "100000",
-                            "user_id": null,
-                            "adv_id": "1149278"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92",
-                            "min_amount": "100000",
-                            "user_id": null,
-                            "adv_id": "1149278"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.3",
-                            "min_amount": "50000",
-                            "user_id": null,
-                            "adv_id": "1149181"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.3",
-                            "min_amount": "50000",
-                            "user_id": null,
-                            "adv_id": "1149181"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "109",
-                            "min_amount": "100",
-                            "user_id": null,
-                            "adv_id": "1149167"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "94",
-                            "min_amount": "100",
-                            "user_id": null,
-                            "adv_id": "1149145"
-                        }
-                    ],
+                    "SBP": [],
                     "SBER": [
                         {
                             "user_name": null,
-                            "price": "92",
+                            "price": "92.8",
                             "min_amount": "15000",
                             "user_id": null,
-                            "adv_id": "1150107"
+                            "adv_id": "1169480"
                         },
                         {
                             "user_name": null,
-                            "price": "92.5",
+                            "price": "92.8",
+                            "min_amount": "15000",
+                            "user_id": null,
+                            "adv_id": "1169480"
+                        },
+                        {
+                            "user_name": null,
+                            "price": "92.8",
                             "min_amount": "5000",
                             "user_id": null,
-                            "adv_id": "1150071"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.4",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149956"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92",
-                            "min_amount": "100000",
-                            "user_id": null,
-                            "adv_id": "1149883"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92",
-                            "min_amount": "100000",
-                            "user_id": null,
-                            "adv_id": "1149883"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92",
-                            "min_amount": "100000",
-                            "user_id": null,
-                            "adv_id": "1149883"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92",
-                            "min_amount": "100000",
-                            "user_id": null,
-                            "adv_id": "1149883"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92",
-                            "min_amount": "100000",
-                            "user_id": null,
-                            "adv_id": "1149883"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.2",
-                            "min_amount": "682.28",
-                            "user_id": null,
-                            "adv_id": "1149866"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "93",
-                            "min_amount": "2500",
-                            "user_id": null,
-                            "adv_id": "1149620"
+                            "adv_id": "1169471"
                         },
                         {
                             "user_name": null,
                             "price": "93",
                             "min_amount": "1000",
                             "user_id": null,
-                            "adv_id": "1149480"
+                            "adv_id": "1169470"
                         },
                         {
                             "user_name": null,
-                            "price": "92",
-                            "min_amount": "100000",
+                            "price": "93",
+                            "min_amount": "1000",
                             "user_id": null,
-                            "adv_id": "1149278"
+                            "adv_id": "1169470"
                         },
                         {
                             "user_name": null,
-                            "price": "92",
-                            "min_amount": "100000",
+                            "price": "93",
+                            "min_amount": "1000",
                             "user_id": null,
-                            "adv_id": "1149278"
+                            "adv_id": "1169470"
                         },
                         {
                             "user_name": null,
-                            "price": "92",
-                            "min_amount": "100000",
+                            "price": "94.2",
+                            "min_amount": "1",
                             "user_id": null,
-                            "adv_id": "1149278"
+                            "adv_id": "1169426"
                         },
                         {
                             "user_name": null,
-                            "price": "92.4",
-                            "min_amount": "8000",
+                            "price": "94.2",
+                            "min_amount": "1",
                             "user_id": null,
-                            "adv_id": "1149224"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.4",
-                            "min_amount": "8000",
-                            "user_id": null,
-                            "adv_id": "1149224"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.3",
-                            "min_amount": "50000",
-                            "user_id": null,
-                            "adv_id": "1149181"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.3",
-                            "min_amount": "50000",
-                            "user_id": null,
-                            "adv_id": "1149181"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "109",
-                            "min_amount": "100",
-                            "user_id": null,
-                            "adv_id": "1149167"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "94",
-                            "min_amount": "100",
-                            "user_id": null,
-                            "adv_id": "1149145"
+                            "adv_id": "1169426"
                         }
                     ],
-                    "TINKOFF": [
-                        {
-                            "user_name": null,
-                            "price": "92.5",
-                            "min_amount": "5000",
-                            "user_id": null,
-                            "adv_id": "1150071"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.4",
-                            "min_amount": "10000",
-                            "user_id": null,
-                            "adv_id": "1149998"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.29",
-                            "min_amount": "25000",
-                            "user_id": null,
-                            "adv_id": "1149662"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.29",
-                            "min_amount": "25000",
-                            "user_id": null,
-                            "adv_id": "1149662"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.29",
-                            "min_amount": "25000",
-                            "user_id": null,
-                            "adv_id": "1149662"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "93",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149480"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "92.4",
-                            "min_amount": "10000",
-                            "user_id": null,
-                            "adv_id": "1149463"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "109",
-                            "min_amount": "100",
-                            "user_id": null,
-                            "adv_id": "1149167"
-                        }
-                    ]
+                    "TINKOFF": []
                 },
                 "BTC": {
                     "Raiffaizen": [],
@@ -19430,448 +19071,25 @@
         "BUY": {
             "RUB": {
                 "USDT": {
-                    "Raiffaizen": [
-                        {
-                            "user_name": null,
-                            "price": "90.3",
-                            "min_amount": "20000",
-                            "user_id": null,
-                            "adv_id": "1149799"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.3",
-                            "min_amount": "20000",
-                            "user_id": null,
-                            "adv_id": "1149799"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.3",
-                            "min_amount": "20000",
-                            "user_id": null,
-                            "adv_id": "1149799"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.92",
-                            "min_amount": "10000",
-                            "user_id": null,
-                            "adv_id": "1149260"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.92",
-                            "min_amount": "10000",
-                            "user_id": null,
-                            "adv_id": "1149260"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90",
-                            "min_amount": "10000",
-                            "user_id": null,
-                            "adv_id": "1149257"
-                        }
-                    ],
+                    "Raiffaizen": [],
                     "SBP": [
                         {
                             "user_name": null,
-                            "price": "90.31",
-                            "min_amount": "5000",
-                            "user_id": null,
-                            "adv_id": "1149952"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.3",
+                            "price": "90.87",
                             "min_amount": "20000",
                             "user_id": null,
-                            "adv_id": "1149799"
+                            "adv_id": "1169542"
                         },
                         {
                             "user_name": null,
-                            "price": "90.3",
-                            "min_amount": "20000",
+                            "price": "88.1",
+                            "min_amount": "100",
                             "user_id": null,
-                            "adv_id": "1149799"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.3",
-                            "min_amount": "20000",
-                            "user_id": null,
-                            "adv_id": "1149799"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "88",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149668"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.92",
-                            "min_amount": "10000",
-                            "user_id": null,
-                            "adv_id": "1149260"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.92",
-                            "min_amount": "10000",
-                            "user_id": null,
-                            "adv_id": "1149260"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90",
-                            "min_amount": "10000",
-                            "user_id": null,
-                            "adv_id": "1149257"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.3",
-                            "min_amount": "10000",
-                            "user_id": null,
-                            "adv_id": "1149164"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.3",
-                            "min_amount": "10000",
-                            "user_id": null,
-                            "adv_id": "1149164"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.3",
-                            "min_amount": "10000",
-                            "user_id": null,
-                            "adv_id": "1149164"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
+                            "adv_id": "1169424"
                         }
                     ],
-                    "SBER": [
-                        {
-                            "user_name": null,
-                            "price": "90.65",
-                            "min_amount": "80000",
-                            "user_id": null,
-                            "adv_id": "1149992"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.3",
-                            "min_amount": "20000",
-                            "user_id": null,
-                            "adv_id": "1149799"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.3",
-                            "min_amount": "20000",
-                            "user_id": null,
-                            "adv_id": "1149799"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.3",
-                            "min_amount": "20000",
-                            "user_id": null,
-                            "adv_id": "1149799"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.9",
-                            "min_amount": "100000",
-                            "user_id": null,
-                            "adv_id": "1149712"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "88",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149668"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.92",
-                            "min_amount": "10000",
-                            "user_id": null,
-                            "adv_id": "1149260"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.92",
-                            "min_amount": "10000",
-                            "user_id": null,
-                            "adv_id": "1149260"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90",
-                            "min_amount": "10000",
-                            "user_id": null,
-                            "adv_id": "1149257"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.78",
-                            "min_amount": "80000",
-                            "user_id": null,
-                            "adv_id": "1149176"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        }
-                    ],
-                    "TINKOFF": [
-                        {
-                            "user_name": null,
-                            "price": "90.3",
-                            "min_amount": "5000",
-                            "user_id": null,
-                            "adv_id": "1149900"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.9",
-                            "min_amount": "100000",
-                            "user_id": null,
-                            "adv_id": "1149712"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.3",
-                            "min_amount": "5000",
-                            "user_id": null,
-                            "adv_id": "1149462"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.3",
-                            "min_amount": "5000",
-                            "user_id": null,
-                            "adv_id": "1149462"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.92",
-                            "min_amount": "10000",
-                            "user_id": null,
-                            "adv_id": "1149260"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.92",
-                            "min_amount": "10000",
-                            "user_id": null,
-                            "adv_id": "1149260"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        },
-                        {
-                            "user_name": null,
-                            "price": "90.2",
-                            "min_amount": "1000",
-                            "user_id": null,
-                            "adv_id": "1149124"
-                        }
-                    ]
+                    "SBER": [],
+                    "TINKOFF": []
                 },
                 "BTC": {
                     "Raiffaizen": [],
