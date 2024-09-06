@@ -4,6 +4,8 @@ import aiofiles
 import json
 from pathlib import Path
 
+from celery import shared_task
+
 from django.conf import settings
 
 from P2PCalculator.PREFERENCES import SM_DATA_FILE_NAME, UPDATE_RATE
@@ -19,16 +21,8 @@ from .ST_contexts.Bitget.Static import SM_NAME as BI_SM_NAME
 
 
 
-finish_thread = [False]
-
-
 
 FILE_PATH = Path(settings.MEDIA_ROOT).joinpath(SM_DATA_FILE_NAME)
-
-
-refresh_Bybit_done = [True]
-refresh_HTX_done = [True]
-refresh_Bitget_done = [True]
 
 refresh_lock = asyncio.Lock()
 
@@ -41,38 +35,49 @@ async def get_current_data():
         content = await file.read()
         return json.loads(content)
     
-async def write_current_data(data):
 
+
+async def write_current_data(data):
     async with aiofiles.open(FILE_PATH, 'w', encoding='utf-8') as file:
         await file.write(json.dumps(data, ensure_ascii=False, indent=4))
 
 
 
-async def refresh(refresh_function, SM_NAME:str, flag:list, session:aiohttp.ClientSession):
-    if(flag[0] == True):
-        flag[0] = False
-    else: return
+async def refresh(refresh_function, SM_NAME:str, session:aiohttp.ClientSession):
 
     data = await get_current_data()
 
     Fresh_data = await refresh_function(session = session)
     data[SM_NAME] = Fresh_data
     await write_current_data(data)
-    await asyncio.sleep(UPDATE_RATE)
-    flag[0] = True
 
 
 
-
-
-async def refresh_data():
+@shared_task
+async def refresh_data_BITGET():
     async with aiohttp.ClientSession() as session:
-        await refresh(bi_get_data, BI_SM_NAME, refresh_Bitget_done, session)
+        await refresh(bi_get_data, BI_SM_NAME, session)
         print(">> Bitget update completed <<")
-        await refresh(b_get_data, B_SM_NAME, refresh_Bybit_done, session)
+        return "Success"
+
+
+
+@shared_task
+async def refresh_data_BYBIT():
+    async with aiohttp.ClientSession() as session:
+        await refresh(b_get_data, B_SM_NAME, session)
         print(">> Bybit update completed <<")
-        await refresh(h_get_data, H_SM_NAME, refresh_HTX_done, session)
+        return "Success"
+
+
+
+@shared_task
+async def refresh_data_HTX():
+    async with aiohttp.ClientSession() as session:
+        await refresh(h_get_data, H_SM_NAME, session)
         print(">> HTX update completed <<")
+        return "Success"
+
             
 
 
