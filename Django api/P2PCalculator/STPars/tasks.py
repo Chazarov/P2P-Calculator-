@@ -3,12 +3,13 @@ import aiohttp
 import aiofiles
 import json
 from pathlib import Path
+from django.core.cache import cache
 
 from celery import shared_task
 
 from django.conf import settings
 
-from P2PCalculator.PREFERENCES import SM_DATA_FILE_NAME, UPDATE_RATE
+from P2PCalculator.PREFERENCES import SM_DATA_FILE_NAME, UPDATE_RATE, LOCK_EXPIRE
 
 
 from .ST_contexts.Bybit.STrequests import get_data as b_get_data
@@ -27,6 +28,15 @@ FILE_PATH = Path(settings.MEDIA_ROOT).joinpath(SM_DATA_FILE_NAME)
 refresh_lock = asyncio.Lock()
 
 
+
+
+def acquire_lock(lock_id):
+    return cache.add(lock_id, "locked", LOCK_EXPIRE)
+
+
+
+def release_lock(lock_id):
+    cache.delete(lock_id)
 
 
 

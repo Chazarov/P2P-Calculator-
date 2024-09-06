@@ -4,3 +4,6 @@ UPDATE_RATE = 3
 SM_DATA_FILE_NAME = "STData.json"
 
 KOEF_FILE_NAME = "koefs.json"
+
+# Block time before resuming a task
+LOCK_EXPIRE = 60 * 10
