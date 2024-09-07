@@ -1,9 +1,12 @@
 import os
 
 from celery import Celery
+from django.core.wsgi import get_wsgi_application
+
 
 # Set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'P2PCalculator.settings')
+application = get_wsgi_application()
 
 app = Celery('P2PCalculator')
 
