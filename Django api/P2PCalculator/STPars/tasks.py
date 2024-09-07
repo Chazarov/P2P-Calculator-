@@ -2,6 +2,7 @@ import asyncio
 import aiohttp
 import aiofiles
 import json
+import logging
 from pathlib import Path
 from django.core.cache import cache
 
@@ -30,15 +31,6 @@ refresh_lock = asyncio.Lock()
 
 
 
-def acquire_lock(lock_id):
-    return cache.add(lock_id, "locked", LOCK_EXPIRE)
-
-
-
-def release_lock(lock_id):
-    cache.delete(lock_id)
-
-
 
 async def get_current_data():
     async with aiofiles.open(FILE_PATH, "r", encoding='utf-8') as file:
@@ -63,7 +55,24 @@ async def refresh(refresh_function, SM_NAME:str, session:aiohttp.ClientSession):
 
 
 
+async def test_task():
+    async with aiohttp.ClientSession() as session:
+        await write_current_data({"try":"OMG succses"})
+        return "Success"
+
+
+
+logger = logging.getLogger(__name__)
 @shared_task
+def sync_ref_TEST():
+    logger.info(f"Logger Data saved to {FILE_PATH}")
+    print("\n\n\n\n=========> HERE <=========\n\n\n\n\n")
+    with open("TEST.txt", "w") as file:
+        file.write("=========> HERE <=========")
+    return "Succses"
+
+
+
 async def refresh_data_BITGET():
     async with aiohttp.ClientSession() as session:
         await refresh(bi_get_data, BI_SM_NAME, session)
@@ -72,7 +81,6 @@ async def refresh_data_BITGET():
 
 
 
-@shared_task
 async def refresh_data_BYBIT():
     async with aiohttp.ClientSession() as session:
         await refresh(b_get_data, B_SM_NAME, session)
@@ -81,7 +89,6 @@ async def refresh_data_BYBIT():
 
 
 
-@shared_task
 async def refresh_data_HTX():
     async with aiohttp.ClientSession() as session:
         await refresh(h_get_data, H_SM_NAME, session)
