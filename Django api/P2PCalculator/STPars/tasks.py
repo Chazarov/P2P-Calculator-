@@ -33,21 +33,21 @@ refresh_lock = asyncio.Lock()
 
 
 
-@shared_task(bind=True, acks_late=True)
+@shared_task(base = Singleton)
 def sync_refresh_data_BITGET(task_id=None):
     asyncio.run(refresh_data_BITGET())
     return ">> Bitget update completed <<"
 
 
 
-@shared_task(bind=True, acks_late=True)
+@shared_task(base = Singleton)
 def sync_refresh_data_BYBIT(task_id=None):
     asyncio.run(refresh_data_BYBIT())
     return ">> Bybit update completed <<"
 
 
 
-@shared_task(bind=True, acks_late=True)
+@shared_task(base = Singleton)
 def sync_refresh_data_HTX(task_id=None):
     asyncio.run(refresh_data_HTX())
     return ">> HTX update completed <<"
