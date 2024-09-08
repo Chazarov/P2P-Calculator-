@@ -7,6 +7,7 @@ from pathlib import Path
 from django.core.cache import cache
 
 from celery import shared_task
+from celery_singleton import Singleton
 
 from django.conf import settings
 
@@ -32,6 +33,34 @@ refresh_lock = asyncio.Lock()
 
 
 
+@shared_task(base = Singleton)
+def sync_refresh_data_BITGET():
+    asyncio.run(refresh_data_BITGET())
+    return ">> Bitget update completed <<"
+
+
+
+@shared_task(base = Singleton)
+def sync_refresh_data_BYBIT():
+    asyncio.run(refresh_data_BYBIT())
+    return ">> Bybit update completed <<"
+
+
+
+@shared_task(base = Singleton)
+def sync_refresh_data_HTX():
+    asyncio.run(refresh_data_HTX())
+    return ">> HTX update completed <<"
+
+
+
+@shared_task(Base = Singleton)
+def TEST():
+    print(" ❗ TEST ❗")
+    return " ❗ Succses ❗ "
+
+
+
 async def get_current_data():
     async with aiofiles.open(FILE_PATH, "r", encoding='utf-8') as file:
         content = await file.read()
@@ -54,30 +83,6 @@ async def refresh(refresh_function, SM_NAME:str, session:aiohttp.ClientSession):
     await write_current_data(data)
 
 
-
-@shared_task
-def sync_refresh_data_BITGET():
-    asyncio.run(refresh_data_BITGET())
-    return ">> Bitget update completed <<"
-
-
-
-@shared_task
-def sync_refresh_data_BYBIT():
-    asyncio.run(refresh_data_BYBIT())
-    return ">> Bybit update completed <<"
-
-
-
-@shared_task
-def sync_refresh_data_HTX():
-    asyncio.run(refresh_data_HTX())
-    return ">> HTX update completed <<"
-
-@shared_task
-def TEST():
-    with open("TEST.txt", "w") as file:
-        file.write(" ===> TEST <===")
 
 async def refresh_data_BITGET():
     async with aiohttp.ClientSession() as session:
