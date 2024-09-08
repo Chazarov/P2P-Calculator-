@@ -55,45 +55,45 @@ async def refresh(refresh_function, SM_NAME:str, session:aiohttp.ClientSession):
 
 
 
-async def test_task():
-    async with aiohttp.ClientSession() as session:
-        await write_current_data({"try":"OMG succses"})
-        return "Success"
-
-
-
-logger = logging.getLogger(__name__)
 @shared_task
-def sync_ref_TEST():
-    logger.info(f"Logger Data saved to {FILE_PATH}")
-    print("\n\n\n\n=========> HERE <=========\n\n\n\n\n")
+def sync_refresh_data_BITGET():
+    asyncio.run(refresh_data_BITGET())
+    return ">> Bitget update completed <<"
+
+
+
+@shared_task
+def sync_refresh_data_BYBIT():
+    asyncio.run(refresh_data_BYBIT())
+    return ">> Bybit update completed <<"
+
+
+
+@shared_task
+def sync_refresh_data_HTX():
+    asyncio.run(refresh_data_HTX())
+    return ">> HTX update completed <<"
+
+@shared_task
+def TEST():
     with open("TEST.txt", "w") as file:
-        file.write("=========> HERE <=========")
-    return "Succses"
-
-
+        file.write(" ===> TEST <===")
 
 async def refresh_data_BITGET():
     async with aiohttp.ClientSession() as session:
         await refresh(bi_get_data, BI_SM_NAME, session)
-        print(">> Bitget update completed <<")
-        return "Success"
 
 
 
 async def refresh_data_BYBIT():
     async with aiohttp.ClientSession() as session:
         await refresh(b_get_data, B_SM_NAME, session)
-        print(">> Bybit update completed <<")
-        return "Success"
 
 
 
 async def refresh_data_HTX():
     async with aiohttp.ClientSession() as session:
         await refresh(h_get_data, H_SM_NAME, session)
-        print(">> HTX update completed <<")
-        return "Success"
 
             
 
