@@ -11,7 +11,7 @@ from celery_singleton import Singleton
 
 from django.conf import settings
 
-from P2PCalculator.PREFERENCES import SM_DATA_FILE_NAME, UPDATE_RATE, LOCK_EXPIRE
+from P2PCalculator.PREFERENCES import SM_DATA_FILE_NAME
 
 
 from .ST_contexts.Bybit.STrequests import get_data as b_get_data
@@ -33,31 +33,24 @@ refresh_lock = asyncio.Lock()
 
 
 
-@shared_task(base = Singleton)
-def sync_refresh_data_BITGET():
+@shared_task(bind=True, acks_late=True)
+def sync_refresh_data_BITGET(task_id=None):
     asyncio.run(refresh_data_BITGET())
     return ">> Bitget update completed <<"
 
 
 
-@shared_task(base = Singleton)
-def sync_refresh_data_BYBIT():
+@shared_task(bind=True, acks_late=True)
+def sync_refresh_data_BYBIT(task_id=None):
     asyncio.run(refresh_data_BYBIT())
     return ">> Bybit update completed <<"
 
 
 
-@shared_task(base = Singleton)
-def sync_refresh_data_HTX():
+@shared_task(bind=True, acks_late=True)
+def sync_refresh_data_HTX(task_id=None):
     asyncio.run(refresh_data_HTX())
     return ">> HTX update completed <<"
-
-
-
-@shared_task(Base = Singleton)
-def TEST():
-    print(" ❗ TEST ❗")
-    return " ❗ Succses ❗ "
 
 
 

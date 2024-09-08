@@ -138,12 +138,18 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:16379/1',
+    }
+}
 
 # Celery 
+
 CELERY_CACHE_BACKEND = 'default'
 
-CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672'
+CELERY_BROKER_URL = 'redis://127.0.0.1:16379/0'
 
 CELERY_RESULT_BACKEND = 'django-db'
 
