@@ -12,7 +12,7 @@ from Contexts.Get_exchanges.STATIC import PAIRS_BITGET, CURRENCIES_BLOCKCHAIN_BT
 
 from TG.user.kbds import main_menu_buttons, sub_menu_buttons, exchange_rate_buttons
 
-from TG.callbacks import USER_CALLBACKS
+from TG.callbacks import USER_CALLBACKS, USER_REQUESTS
 
 
 bot = Bot(token = os.getenv("TOKEN"))
@@ -25,7 +25,15 @@ router = Router()
 @router.message(Command("start"))
 async def command_start(message: types.Message):
     await message.answer("Добро пожаловать!", reply_markup = main_menu_buttons())
-    await message.answer(text = " _ ", reply_markup = sub_menu_buttons())
+    await message.answer(text = " Выберите интересующий вариант по кнопкам ниже: ", reply_markup = sub_menu_buttons())
+
+
+
+@router.message(F.text == USER_REQUESTS.MAIN_MENU)
+async def main_menu(message: types.Message):
+    await message.answer(text = " Выберите интересующий вариант по кнопкам ниже: ", reply_markup = sub_menu_buttons())
+    await message.delete()
+
 
 
 @router.message()

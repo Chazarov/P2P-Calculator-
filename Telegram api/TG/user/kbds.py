@@ -4,7 +4,7 @@ from aiogram.filters.callback_data import CallbackData
 
 from TG.STATIC import P2P_PARS_URL, CALCULATOR_URL
 
-from TG.callbacks import USER_CALLBACKS as U_S
+from TG.callbacks import USER_CALLBACKS as U_S, USER_REQUESTS as U_R
 
 P2P_pars_web_app = WebAppInfo(url = P2P_PARS_URL)
 Calculator_web_app = WebAppInfo(url = CALCULATOR_URL)
@@ -20,6 +20,9 @@ def main_menu_buttons():
             ],
             [
                 KeyboardButton(text = "➕➖✖️ Калькулятор", web_app = Calculator_web_app),
+            ],
+            [
+                KeyboardButton(text = U_R.MAIN_MENU),
             ],
         ]
     )
