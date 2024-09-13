@@ -1,0 +1,3 @@
+PassengerEnabled On
+PassengerPython /home/z/zaharoz0/sibtrust-p2p.ru/Project/.venv/bin/python3.10
+PassengerFriendlyErrorPages On 
