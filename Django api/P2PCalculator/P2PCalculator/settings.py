@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-_^b5odqiu#$d(0_mt&93n5=v4xnw1jv16t-zch=*wj-u&10ue6
 DEBUG = True
 
 
-ALLOWED_HOSTS = ["7abd-193-33-153-73.ngrok-free.app", "127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 
 
@@ -48,8 +48,6 @@ INSTALLED_APPS = [
     'Main',
     'STPars',
     'Customizer',
-    'django_celery_results',
-    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -144,20 +142,3 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
-    }
-}
-
-# Celery 
-
-CELERY_CACHE_BACKEND = 'default'
-
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
-
-CELERY_RESULT_BACKEND = 'django-db'
-
-CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"

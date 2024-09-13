@@ -1,7 +1,6 @@
 import json
 import os
 import redis
-import asyncio
 from pathlib import Path
 
 from django.conf import settings
