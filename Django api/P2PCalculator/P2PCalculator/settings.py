@@ -88,14 +88,14 @@ WSGI_APPLICATION = 'P2PCalculator.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE':'django.db.backends.mysql',
-        'NAME':'zaharoz0_django',
-        'PASSWORD': os.getenv("DATABASE_PASS"),
-        'USER': 'zaharoz0_django',
-        'HOST':'localhost',
-        'PORT':'3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE':'django.db.backends.mysql',
+        # 'NAME':'zaharoz0_django',
+        # 'PASSWORD': os.getenv("DATABASE_PASS"),
+        # 'USER': 'zaharoz0_django',
+        # 'HOST':'localhost',
+        # 'PORT':'3306',
     }
 }
 
