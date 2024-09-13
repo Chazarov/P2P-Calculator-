@@ -1,6 +1,10 @@
 import asyncio
 import aiohttp
 import aiofiles
+import redis
+import os
+import aioredis
+import json
 import json
 import logging
 from pathlib import Path
@@ -11,7 +15,7 @@ from celery_singleton import Singleton
 
 from django.conf import settings
 
-from P2PCalculator.PREFERENCES import SM_DATA_FILE_NAME
+from P2PCalculator import PREFERENCES
 
 
 from .ST_contexts.Bybit.STrequests import get_data as b_get_data
@@ -25,8 +29,8 @@ from .ST_contexts.Bitget.Static import SM_NAME as BI_SM_NAME
 
 
 
-FILE_PATH = Path(settings.MEDIA_ROOT).joinpath(SM_DATA_FILE_NAME)
 
+# FILE_PATH = Path(settings.MEDIA_ROOT).joinpath(SM_DATA_FILE_NAME)
 refresh_lock = asyncio.Lock()
 
 
@@ -54,17 +58,30 @@ def sync_refresh_data_HTX(task_id=None):
 
 
 
-async def get_current_data():
-    async with aiofiles.open(FILE_PATH, "r", encoding='utf-8') as file:
-        content = await file.read()
-        return json.loads(content)
-    
+# async def get_current_data():
+#     async with aiofiles.open(FILE_PATH, "r", encoding='utf-8') as file:
+#         content = await file.read()
+#         return json.loads(content)
 
+async def get_current_data():
+    redis = await aioredis.create_redis_pool(PREFERENCES.REDIS_HOST, password=os.getenv("REDIS_PASS"))
+    stored_data_string = await redis.get(PREFERENCES.REDIS_SM_DATA_KEY)
+    if(stored_data_string):
+        stored_json_data = json.loads(stored_data_string)
+    redis.close()
+    await redis.wait_closed()
+    return stored_json_data
+
+# async def write_current_data(data):
+#     async with aiofiles.open(FILE_PATH, 'w', encoding='utf-8') as file:
+#         await file.write(json.dumps(data, ensure_ascii=False, indent=4))
 
 async def write_current_data(data):
-    async with aiofiles.open(FILE_PATH, 'w', encoding='utf-8') as file:
-        await file.write(json.dumps(data, ensure_ascii=False, indent=4))
-
+    redis = await aioredis.create_redis_pool(PREFERENCES.REDIS_HOST, password=os.getenv("REDIS_PASS"))
+    json_string = json.dumps(data)
+    await redis.set(PREFERENCES.SM_DATA_FILE_NAME, json_string)
+    redis.close()
+    await redis.wait_closed()
 
 
 async def refresh(refresh_function, SM_NAME:str, session:aiohttp.ClientSession):

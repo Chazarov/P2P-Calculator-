@@ -1,14 +1,20 @@
-from django.conf import settings
 import json
+import os
+import aioredis
+import asyncio
 from pathlib import Path
 
+from django.conf import settings
+
+
+
 from .ST_contexts.BASE_STATIC import PAYMENTS
-from P2PCalculator.PREFERENCES import SM_DATA_FILE_NAME, KOEF_FILE_NAME
+from P2PCalculator import PREFERENCES
 
-# сохранение будет производится в файл "STData.json" в динамической директории MEDIA <<< !!!
 
-# Здесь нужно импортировать путь к сохраненному Json и производить поиск непосредственно в нем
 
+
+# сохранение будет производится в redis
 # Шаблон json - запроса (Входящие данные): 
 # params = {
 #     "SM":""
@@ -30,18 +36,18 @@ from P2PCalculator.PREFERENCES import SM_DATA_FILE_NAME, KOEF_FILE_NAME
 #           {
 #           "SM":"",
 #           "buy":{
-    #         "payment":"",
-    #         "currency":"",
-    #         "token":"",
-    #         "min_amount":"",
-    #       },
+#           "payment":"",
+#           "currency":"",
+#           "token":"",
+#           "min_amount":"",
+#         },
 #           "sell":{
-    #           "payment":"",
-    #           "currency":"",
-    #           "token":"",
-    #           "min_amount":"",
-    #           }
-    #       },
+#             "payment":"",
+#             "currency":"",
+#             "token":"",
+#             "min_amount":"",
+#             }
+#         },
 #   }
 
 
@@ -88,15 +94,23 @@ def check_fields(request):
 
 
 
+async def get_current_data():
+    redis = await aioredis.create_redis_pool(PREFERENCES.REDIS_HOST, password=os.getenv("REDIS_PASS"))
+    stored_data_string = await redis.get(PREFERENCES.REDIS_SM_DATA_KEY)
+    if(stored_data_string):
+        stored_json_data = json.loads(stored_data_string)
+    redis.close()
+    await redis.wait_closed()
+    return stored_json_data
 
 
 def processing_data(params:dict)->dict:
     
     if(not check_fields(params)): return None
 
-    koefs_data = ""
-    with open(Path(settings.MEDIA_ROOT).joinpath(KOEF_FILE_NAME), "r", encoding = "utf-8") as file:
-        koefs_data = json.load(file)
+    # with open(Path(settings.MEDIA_ROOT).joinpath(KOEF_FILE_NAME), "r", encoding = "utf-8") as file:
+    #     koefs_data = json.load(file)
+    koefs_data = json.load(asyncio.run(get_current_data()))
 
     comission_buy = float(koefs_data.get(params["SM"]).get(params["buy"]["trade_role"]))
     comission_sell = float(koefs_data.get(params["SM"]).get(params["sell"]["trade_role"]))
@@ -111,7 +125,7 @@ def processing_data(params:dict)->dict:
     sell_min_amount = float(sell_block.get("min_amount"))
 
     pars_data = None
-    with open(Path(settings.MEDIA_ROOT).joinpath(SM_DATA_FILE_NAME), "r", encoding = "utf-8") as file:
+    with open(Path(settings.MEDIA_ROOT).joinpath(PREFERENCES.SM_DATA_FILE_NAME), "r", encoding = "utf-8") as file:
         pars_data = json.load(file)
 
     buy_payments = pars_data.get(SM).get("BUY").get(buy_block["currency"]).get(buy_block["token"])
