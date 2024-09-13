@@ -1,6 +1,6 @@
 import json
 import os
-import aioredis
+import redis
 import asyncio
 from pathlib import Path
 
@@ -94,13 +94,13 @@ def check_fields(request):
 
 
 
-async def get_current_data():
-    redis = await aioredis.create_redis_pool(PREFERENCES.REDIS_HOST, password=os.getenv("REDIS_PASS"))
-    stored_data_string = await redis.get(PREFERENCES.REDIS_SM_DATA_KEY)
+def get_current_data():
+    r = redis.Redis(host=PREFERENCES.REDIS_HOST, port=6379, db=0, password = os.getenv("REDIS_PASS"))
+    stored_data_string = r.get(PREFERENCES.REDIS_SM_DATA_KEY)
     if(stored_data_string):
         stored_json_data = json.loads(stored_data_string)
-    redis.close()
-    await redis.wait_closed()
+    r.close()
+    
     return stored_json_data
 
 
@@ -110,7 +110,7 @@ def processing_data(params:dict)->dict:
 
     # with open(Path(settings.MEDIA_ROOT).joinpath(KOEF_FILE_NAME), "r", encoding = "utf-8") as file:
     #     koefs_data = json.load(file)
-    koefs_data = json.load(asyncio.run(get_current_data()))
+    koefs_data = json.load(get_current_data())
 
     comission_buy = float(koefs_data.get(params["SM"]).get(params["buy"]["trade_role"]))
     comission_sell = float(koefs_data.get(params["SM"]).get(params["sell"]["trade_role"]))

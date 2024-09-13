@@ -3,7 +3,6 @@ import aiohttp
 import aiofiles
 import redis
 import os
-import aioredis
 import json
 import json
 import logging
@@ -63,13 +62,12 @@ def sync_refresh_data_HTX(task_id=None):
 #         content = await file.read()
 #         return json.loads(content)
 
-async def get_current_data():
-    redis = await aioredis.create_redis_pool(PREFERENCES.REDIS_HOST, password=os.getenv("REDIS_PASS"))
-    stored_data_string = await redis.get(PREFERENCES.REDIS_SM_DATA_KEY)
+def get_current_data():
+    r = redis.Redis(host=PREFERENCES.REDIS_HOST, port=6379, db=0, password = os.getenv("REDIS_PASS"))
+    stored_data_string = r.get(PREFERENCES.REDIS_SM_DATA_KEY)
     if(stored_data_string):
         stored_json_data = json.loads(stored_data_string)
-    redis.close()
-    await redis.wait_closed()
+    r.close()
     return stored_json_data
 
 # async def write_current_data(data):
@@ -77,20 +75,19 @@ async def get_current_data():
 #         await file.write(json.dumps(data, ensure_ascii=False, indent=4))
 
 async def write_current_data(data):
-    redis = await aioredis.create_redis_pool(PREFERENCES.REDIS_HOST, password=os.getenv("REDIS_PASS"))
+    r = redis.Redis(host=PREFERENCES.REDIS_HOST, port=6379, db=0, password = os.getenv("REDIS_PASS"))
     json_string = json.dumps(data)
-    await redis.set(PREFERENCES.SM_DATA_FILE_NAME, json_string)
+    redis.set(PREFERENCES.SM_DATA_FILE_NAME, json_string)
     redis.close()
-    await redis.wait_closed()
 
 
 async def refresh(refresh_function, SM_NAME:str, session:aiohttp.ClientSession):
 
-    data = await get_current_data()
+    data = get_current_data()
 
     Fresh_data = await refresh_function(session = session)
     data[SM_NAME] = Fresh_data
-    await write_current_data(data)
+    write_current_data(data)
 
 
 
