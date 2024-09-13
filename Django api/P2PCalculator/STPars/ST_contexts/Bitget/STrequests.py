@@ -10,7 +10,6 @@ import urllib.parse
 
 import aiohttp
 from dotenv import find_dotenv, load_dotenv
-load_dotenv(find_dotenv())
 
 
 from .Static import TOKENS, CURRENCIES, BASE_URL, RELATIVE_URL, PREFERENCES, PAYMENTS, TRADE_ROLE, SM_NAME

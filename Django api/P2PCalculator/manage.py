@@ -2,10 +2,14 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from dotenv import find_dotenv, load_dotenv
+
 
 
 
 def main():
+    # Load envirement
+    load_dotenv(find_dotenv())
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'P2PCalculator.settings')
     try:
