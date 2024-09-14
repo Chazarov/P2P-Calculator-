@@ -107,9 +107,8 @@ def processing_data(params:dict)->dict:
     
     if(not check_fields(params)): return None
 
-    # with open(Path(settings.MEDIA_ROOT).joinpath(KOEF_FILE_NAME), "r", encoding = "utf-8") as file:
-    #     koefs_data = json.load(file)
-    koefs_data = json.load(get_current_data())
+    with open(Path(settings.MEDIA_ROOT).joinpath(PREFERENCES.KOEF_FILE_NAME), "r", encoding = "utf-8") as file:
+        koefs_data = json.load(file)
 
     comission_buy = float(koefs_data.get(params["SM"]).get(params["buy"]["trade_role"]))
     comission_sell = float(koefs_data.get(params["SM"]).get(params["sell"]["trade_role"]))
@@ -124,8 +123,9 @@ def processing_data(params:dict)->dict:
     sell_min_amount = float(sell_block.get("min_amount"))
 
     pars_data = None
-    with open(Path(settings.MEDIA_ROOT).joinpath(PREFERENCES.SM_DATA_FILE_NAME), "r", encoding = "utf-8") as file:
-        pars_data = json.load(file)
+    # with open(Path(settings.MEDIA_ROOT).joinpath(PREFERENCES.SM_DATA_FILE_NAME), "r", encoding = "utf-8") as file:
+    #     pars_data = json.load(file)
+    pars_data = get_current_data()
 
     buy_payments = pars_data.get(SM).get("BUY").get(buy_block["currency"]).get(buy_block["token"])
     sell_payments = pars_data.get(SM).get("BUY").get(sell_block["currency"]).get(sell_block["token"])
