@@ -63,7 +63,7 @@ confirm_button.onclick = function() {
         },
     }
 
-    fetch('Customize/api/', {
+    fetch('api/', {
         method: 'POST',
         headers: {
             'X-CSRFToken': getCookie('csrftoken'), 
