@@ -36,6 +36,14 @@ refresh_lock = asyncio.Lock()
 
 
 
+empty_SM_data = {
+
+}
+
+
+
+
+
 @shared_task(base = Singleton)
 def sync_refresh_data_BITGET(task_id=None):
     asyncio.run(refresh_data_BITGET())
@@ -63,19 +71,22 @@ def sync_refresh_data_HTX(task_id=None):
 #         return json.loads(content)
 
 def get_current_data():
-    r = redis.Redis(host=PREFERENCES.REDIS_HOST, port=6379, db=0, password = os.getenv("REDIS_PASS"))
+    print(os.getenv("REDIS_PASS"))
+    r = redis.Redis(host=PREFERENCES.REDIS_HOST, port=6379, password = os.getenv("REDIS_PASS"), decode_responses=True)
     stored_data_string = r.get(PREFERENCES.REDIS_SM_DATA_KEY)
     if(stored_data_string):
         stored_json_data = json.loads(stored_data_string)
-    r.close()
-    return stored_json_data
+        r.close()
+        return stored_json_data
+    else:
+        return {}
 
 # async def write_current_data(data):
 #     async with aiofiles.open(FILE_PATH, 'w', encoding='utf-8') as file:
 #         await file.write(json.dumps(data, ensure_ascii=False, indent=4))
 
 async def write_current_data(data):
-    r = redis.Redis(host=PREFERENCES.REDIS_HOST, port=6379, db=0, password = os.getenv("REDIS_PASS"))
+    r = redis.Redis(host=PREFERENCES.REDIS_HOST, port=6379, db=0, password = os.getenv("REDIS_PASS"), decode_responses=True)
     json_string = json.dumps(data)
     redis.set(PREFERENCES.SM_DATA_FILE_NAME, json_string)
     redis.close()
