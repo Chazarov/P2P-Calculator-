@@ -20,7 +20,7 @@ class Command(BaseCommand):
                 task='STPars.tasks.sync_refresh_data_BITGET',
             )
         except ValidationError as e:
-            print("Periodic task with Name 'Pars Bitget' already exists.\n" + str(e))
+            print("Periodic task with Name 'Pars Bitget' already exists.\n")
 
 
 
@@ -31,7 +31,7 @@ class Command(BaseCommand):
                 task='STPars.tasks.sync_refresh_data_BYBIT',
             )
         except ValidationError as e:
-            print("Periodic task with Name 'Pars Bybit' already exists.\n" + str(e))
+            print("Periodic task with Name 'Pars Bybit' already exists.\n")
         
 
 
@@ -42,6 +42,6 @@ class Command(BaseCommand):
                 task='STPars.tasks.sync_refresh_data_HTX',
             )
         except ValidationError as e:
-            print("Periodic task with Name 'Pars HTX' already exists.\n" + str(e))
+            print("Periodic task with Name 'Pars HTX' already exists.\n")
 
-        self.stdout.write(self.style.SUCCESS('Периодические задачи созданы успешно!'))
+        self.stdout.write(self.style.SUCCESS('Periodic tasks created successfully!'))
