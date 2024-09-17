@@ -11,6 +11,7 @@ console.log(`tg object is: ${tg}`)
 
 let data_for_sent = "";
 let grid_data;
+let clickHandlers = [];
 
 
 
@@ -174,7 +175,8 @@ confirm_button.addEventListener('click', () => {
             buttonsArray.forEach(button =>{
                 button.textContent  = "-"
                 button.style.color = 'gray';
-                button.onclick = function() {console.log(`Empty value`);};
+                button.removeEventListener('click', emptyButtonClick); 
+                button.addEventListener('click', emptyButtonClick());
             })
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -201,20 +203,16 @@ confirm_button.addEventListener('click', () => {
                         button.style.color = 'OrangeRed';
                     }
                         
-                
-                    button.onclick = function(event) {
-                        event.stopPropagation(); // предотвращает всплытие
-                        console.log(`${button.id} clicked! Inner data: ${value}`);
-                        
-                        tg.MainButton.setText(`Получить связку ${value["sell"]["payment"]} => ${value["buy"]["payment"]}`);
-                        tg.MainButton.show();
-                        data_for_sent = JSON.stringify(value);
-                    };
+                    button.removeEventListener('click', clickHandlers[i]); 
+                    clickHandlers[i] = createClickHendler(button, value)
+                    button.addEventListener('click', clickHandlers[i]);
                 }
                 else{
                     button.textContent  = "-";
                     button.style.color = 'gray';
-                    button.onclick = function() {console.log(`Empty value`);};
+                    
+                    button.removeEventListener('click', emptyButtonClick); 
+                    button.addEventListener('click', emptyButtonClick);
                 }
                 
                     
@@ -231,6 +229,34 @@ confirm_button.addEventListener('click', () => {
 
     
 });
+
+
+
+function notEmtyButtonClick(button, value){
+        console.log(`${button.id} clicked! Inner data: ${value}`);
+        
+        tg.MainButton.setText(`Получить связку ${value["sell"]["payment"]} => ${value["buy"]["payment"]}`);
+        tg.MainButton.show();
+        data_for_sent = JSON.stringify(value);
+    }
+
+
+
+function emptyButtonClick() {
+    console.log(`Empty value`);
+}
+
+
+function createClickHendler(button, value){
+    return function() {
+        notEmtyButtonClick(button, value);
+    }
+}
+
+
+
+
+
 
 Telegram.WebApp.onEvent(`mainButtonClicked`, function(){
     tg.sendData(data_for_sent)
