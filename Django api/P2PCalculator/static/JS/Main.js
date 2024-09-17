@@ -10,6 +10,7 @@ console.log(`tg object is: ${tg}`)
 
 
 let data_for_sent = "";
+let grid_data;
 
 
 
@@ -173,6 +174,7 @@ confirm_button.addEventListener('click', () => {
             buttonsArray.forEach(button =>{
                 button.textContent  = "-"
                 button.style.color = 'gray';
+                button.onclick = function() {console.log(`Empty value`);};
             })
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -182,11 +184,10 @@ confirm_button.addEventListener('click', () => {
         .then(data => {
             console.log('Success:', data);
 
-
-            let values = data["ceils"]
+            grid_data = data["ceils"]
             // Сетка имеет статичный размер 4Х4 , так что длинна массива const = 16
-            for (let i = 0; i < values.length; i++) {
-                let value = values[i];
+            for (let i = 0; i < grid_data.length; i++) {
+                let value = grid_data[i];
                 let button = buttonsArray[i];
 
                 if(value["exists"] == 'true'){
@@ -201,7 +202,8 @@ confirm_button.addEventListener('click', () => {
                     }
                         
                 
-                    button.onclick = function() {
+                    button.onclick = function(event) {
+                        event.stopPropagation(); // предотвращает всплытие
                         console.log(`${button.id} clicked! Inner data: ${value}`);
                         
                         tg.MainButton.setText(`Получить связку ${value["sell"]["payment"]} => ${value["buy"]["payment"]}`);
@@ -212,6 +214,7 @@ confirm_button.addEventListener('click', () => {
                 else{
                     button.textContent  = "-";
                     button.style.color = 'gray';
+                    button.onclick = function() {console.log(`Empty value`);};
                 }
                 
                     
