@@ -204,7 +204,7 @@ confirm_button.addEventListener('click', () => {
                     }
                         
                     button.removeEventListener('click', clickHandlers[i]); 
-                    clickHandlers[i] = createClickHendler(button, value)
+                    clickHandlers[i] = createClickHandler(button, value)
                     button.addEventListener('click', clickHandlers[i]);
                 }
                 else{
@@ -247,7 +247,7 @@ function emptyButtonClick() {
 }
 
 
-function createClickHendler(button, value){
+function createClickHandler(button, value){
     return function() {
         notEmtyButtonClick(button, value);
     }
