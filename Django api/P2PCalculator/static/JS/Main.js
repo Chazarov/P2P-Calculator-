@@ -1,6 +1,5 @@
 let tg = window.Telegram.WebApp;
 tg.expand();
-
 tg.MainButton.textColor = '#FFFFFF';
 tg.MainButton.color = '#2cab37';
 console.log(`tg object is: ${tg}`)
@@ -171,6 +170,7 @@ confirm_button.addEventListener('click', () => {
             buttonsArray.forEach(button =>{
                 button.textContent  = "-"
                 button.style.color = 'gray';
+                button.onclick = null;
             })
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -201,22 +201,15 @@ confirm_button.addEventListener('click', () => {
                     button.onclick = function() {
                         console.log(`${button.id} clicked! Inner data: ${value}`);
                         
-                        if(tg.MainButton.isVisible)
-                        {
-                            tg.MainButton.hide()
-                        }
-                        else{
-                            tg = window.Telegram.WebApp;
-                            tg.expand();
-                            tg.MainButton.textColor = '#FFFFFF';
-                            tg.MainButton.color = '#2cab37';
-                            tg.MainButton.setText(`Получить связку ${value["sell"]["payment"]} => ${value["buy"]["payment"]}`);
-                            tg.MainButton.show();
-                            data_for_sent = JSON.stringify(value);
-                            Telegram.WebApp.onEvent(`mainButtonClicked`, function(){
-                                tg.sendData(data_for_sent)
-                            })
-                        }
+                        
+                        
+                        tg.MainButton.hide()
+                        tg.MainButton.textColor = '#FFFFFF';
+                        tg.MainButton.color = '#2cab37';
+                        tg.MainButton.setText(`Получить связку ${value["sell"]["payment"]} => ${value["buy"]["payment"]}`);
+                        tg.MainButton.show();
+                        data_for_sent = JSON.stringify(value);
+                        
                         
                         
                     };
@@ -224,6 +217,7 @@ confirm_button.addEventListener('click', () => {
                 else{
                     button.textContent  = "-";
                     button.style.color = 'gray';
+                    button.onclick = null;
                 }
                 
                     
@@ -241,26 +235,6 @@ confirm_button.addEventListener('click', () => {
     
 });
 
-
-function emptyButtonClick() {
-    console.log(`Empty value`);
-}
-
-
-function createClickHandler(button, value){
-    return function() {
-        notEmtyButtonClick(button, value);
-    }
-}
-
-
-
-
-
-
 Telegram.WebApp.onEvent(`mainButtonClicked`, function(){
-    tg.sendData(data_for_sent)
-})
-
-
-
+                            tg.sendData(data_for_sent)
+                        })
