@@ -1,17 +1,13 @@
 let tg = window.Telegram.WebApp;
-
 tg.expand();
 
 tg.MainButton.textColor = '#FFFFFF';
 tg.MainButton.color = '#2cab37';
-
 console.log(`tg object is: ${tg}`)
 
 
 
 let data_for_sent = "";
-let grid_data;
-let clickHandlers = [];
 
 
 
@@ -175,8 +171,6 @@ confirm_button.addEventListener('click', () => {
             buttonsArray.forEach(button =>{
                 button.textContent  = "-"
                 button.style.color = 'gray';
-                button.removeEventListener('click', emptyButtonClick); 
-                button.addEventListener('click', emptyButtonClick());
             })
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -186,10 +180,11 @@ confirm_button.addEventListener('click', () => {
         .then(data => {
             console.log('Success:', data);
 
-            grid_data = data["ceils"]
+
+            let values = data["ceils"]
             // Сетка имеет статичный размер 4Х4 , так что длинна массива const = 16
-            for (let i = 0; i < grid_data.length; i++) {
-                let value = grid_data[i];
+            for (let i = 0; i < values.length; i++) {
+                let value = values[i];
                 let button = buttonsArray[i];
 
                 if(value["exists"] == 'true'){
@@ -203,16 +198,32 @@ confirm_button.addEventListener('click', () => {
                         button.style.color = 'OrangeRed';
                     }
                         
-                    button.removeEventListener('click', clickHandlers[i]); 
-                    clickHandlers[i] = createClickHandler(button, value)
-                    button.addEventListener('click', clickHandlers[i]);
+                    button.onclick = function() {
+                        console.log(`${button.id} clicked! Inner data: ${value}`);
+                        
+                        if(tg.MainButton.isVisible)
+                        {
+                            tg.MainButton.hide()
+                        }
+                        else{
+                            tg = window.Telegram.WebApp;
+                            tg.expand();
+                            tg.MainButton.textColor = '#FFFFFF';
+                            tg.MainButton.color = '#2cab37';
+                            tg.MainButton.setText(`Получить связку ${value["sell"]["payment"]} => ${value["buy"]["payment"]}`);
+                            tg.MainButton.show();
+                            data_for_sent = JSON.stringify(value);
+                            Telegram.WebApp.onEvent(`mainButtonClicked`, function(){
+                                tg.sendData(data_for_sent)
+                            })
+                        }
+                        
+                        
+                    };
                 }
                 else{
                     button.textContent  = "-";
                     button.style.color = 'gray';
-                    
-                    button.removeEventListener('click', emptyButtonClick); 
-                    button.addEventListener('click', emptyButtonClick);
                 }
                 
                     
@@ -229,17 +240,6 @@ confirm_button.addEventListener('click', () => {
 
     
 });
-
-
-
-function notEmtyButtonClick(button, value){
-        console.log(`${button.id} clicked! Inner data: ${value}`);
-        
-        tg.MainButton.setText(`Получить связку ${value["sell"]["payment"]} => ${value["buy"]["payment"]}`);
-        tg.MainButton.show();
-        data_for_sent = JSON.stringify(value);
-    }
-
 
 
 function emptyButtonClick() {
