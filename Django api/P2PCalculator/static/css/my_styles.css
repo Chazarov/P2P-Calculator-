@@ -55,6 +55,7 @@ body {
 }
 .icon img {
     width: 70%;
+    right: 10px;
 }
 
 .custom_size {
