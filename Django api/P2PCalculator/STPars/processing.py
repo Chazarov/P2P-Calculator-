@@ -148,8 +148,8 @@ def processing_data(params:dict)->dict:
 
     for PAYMENT in PAYMENTS_LIST:
         try:
-            buy_filtered_offers = list(filter(lambda x: float(x['min_amount'])*exchange <= buy_min_amount, buy_payments[PAYMENT]))
-            sell_filtered_offers = list(filter(lambda x: float(x['min_amount'])*exchange <= sell_min_amount, sell_payments[PAYMENT]))
+            buy_filtered_offers = list(filter(lambda x: float(x['min_amount']) <= buy_min_amount*exchange, buy_payments[PAYMENT]))
+            sell_filtered_offers = list(filter(lambda x: float(x['min_amount']) <= sell_min_amount*exchange, sell_payments[PAYMENT]))
         except Exception as e:
             buy_filtered_offers = []
             sell_filtered_offers = []
