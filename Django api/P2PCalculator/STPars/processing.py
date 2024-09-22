@@ -1,11 +1,14 @@
 import json
 import os
+import aiohttp
 import redis
+import asyncio
 from pathlib import Path
 
 from django.conf import settings
 
-
+from .ST_contexts.Get_exchanges.CBR.requests import get_currency_rate_RUB
+from .ST_contexts.Get_exchanges.STATIC import CURRENCIES_CBR_RUB
 
 from .ST_contexts.BASE_STATIC import PAYMENTS
 from P2PCalculator import PREFERENCES
@@ -58,6 +61,12 @@ from P2PCalculator import PREFERENCES
 
 # Данные находятся в массиве по ключу ceils
 
+
+
+async def get_RUB_USD_exchange():
+    async with aiohttp.ClientSession() as session:
+        rubusd = await get_currency_rate_RUB(char_code_currency = CURRENCIES_CBR_RUB.USD, session = session)
+    return rubusd
 
 # Checking the correctness of the request body
 def check_fields(request):
@@ -114,6 +123,8 @@ def processing_data(params:dict)->dict:
     comission_sell = float(koefs_data.get(params["SM"]).get(params["sell"]["trade_role"]))
 
     
+    exchange = float(asyncio.run(get_RUB_USD_exchange()))
+
 
     SM = params.get("SM")
     buy_block = params.get("buy")
@@ -123,9 +134,9 @@ def processing_data(params:dict)->dict:
     sell_min_amount = float(sell_block.get("min_amount"))
 
     pars_data = None
+    pars_data = get_current_data()
     # with open(Path(settings.MEDIA_ROOT).joinpath(PREFERENCES.SM_DATA_FILE_NAME), "r", encoding = "utf-8") as file:
     #     pars_data = json.load(file)
-    pars_data = get_current_data()
 
     buy_payments = pars_data.get(SM).get("BUY").get(buy_block["currency"]).get(buy_block["token"])
     sell_payments = pars_data.get(SM).get("BUY").get(sell_block["currency"]).get(sell_block["token"])
@@ -137,8 +148,8 @@ def processing_data(params:dict)->dict:
 
     for PAYMENT in PAYMENTS_LIST:
         try:
-            buy_filtered_offers = list(filter(lambda x: float(x['min_amount']) <= buy_min_amount, buy_payments[PAYMENT]))
-            sell_filtered_offers = list(filter(lambda x: float(x['min_amount']) <= sell_min_amount, sell_payments[PAYMENT]))
+            buy_filtered_offers = list(filter(lambda x: float(x['min_amount']) <= buy_min_amount*exchange, buy_payments[PAYMENT]))
+            sell_filtered_offers = list(filter(lambda x: float(x['min_amount']) <= sell_min_amount*exchange, sell_payments[PAYMENT]))
         except Exception as e:
             buy_filtered_offers = []
             sell_filtered_offers = []
