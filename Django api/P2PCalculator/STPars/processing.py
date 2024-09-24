@@ -188,7 +188,7 @@ def processing_data(params:dict)->dict:
                 buy_am = buy_am - buy_am*comission_buy
                 sell_am = sell_am + sell_am*comission_sell
             
-                koef = round(buy_am/sell_am, 2)
+                koef = round((buy_am/sell_am)*100 - 100, 2)
 
 
                 ceil_data = {
