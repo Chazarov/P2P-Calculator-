@@ -55,7 +55,6 @@ body {
 }
 .icon img {
     width: 70%;
-    right: 10px;
 }
 
 .custom_size {
@@ -64,7 +63,6 @@ body {
 }
 
 .custom_position_button{
-    width: 50px;
     height: 30px;
     border-radius: 20px;
     font-size: 14px;
