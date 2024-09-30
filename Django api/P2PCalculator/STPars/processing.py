@@ -133,13 +133,22 @@ def processing_data(params:dict)->dict:
     buy_min_amount = float(buy_block.get("min_amount"))
     sell_min_amount = float(sell_block.get("min_amount"))
 
-    pars_data = None
     pars_data = get_current_data()
-    # with open(Path(settings.MEDIA_ROOT).joinpath(PREFERENCES.SM_DATA_FILE_NAME), "r", encoding = "utf-8") as file:
-    #     pars_data = json.load(file)
 
-    buy_payments = pars_data.get(SM).get("BUY").get(buy_block["currency"]).get(buy_block["token"])
-    sell_payments = pars_data.get(SM).get("BUY").get(sell_block["currency"]).get(sell_block["token"])
+
+
+    buy_payments = None
+    sell_payments = None
+
+    if(buy_block.get("trade_role") == "taker"):
+        buy_payments = pars_data.get(SM).get("BUY").get(buy_block["currency"]).get(buy_block["token"])
+    elif(buy_block.get("trade_role") == "maker"):
+        buy_payments = pars_data.get(SM).get("SELL").get(buy_block["currency"]).get(buy_block["token"])
+
+    if(sell_block.get("trade_role") == "taker"):
+        sell_payments = pars_data.get(SM).get("SELL").get(sell_block["currency"]).get(sell_block["token"])
+    elif(sell_block.get("trade_role") == "maker"):
+        sell_payments = pars_data.get(SM).get("BUY").get(sell_block["currency"]).get(sell_block["token"])
 
     
 
@@ -155,10 +164,18 @@ def processing_data(params:dict)->dict:
             sell_filtered_offers = []
 
         if(len(buy_filtered_offers) == 0): best_offers[PAYMENT]["buy"] = None
-        else:best_offers[PAYMENT]["buy"] = max(buy_filtered_offers, key=lambda x: float(x["price"]))
+        else: 
+            if(buy_block.get("trade_role") == "taker"):
+                best_offers[PAYMENT]["buy"] = max(buy_filtered_offers, key=lambda x: float(x["price"]))
+            else:
+                best_offers[PAYMENT]["buy"] = min(buy_filtered_offers, key=lambda x: float(x["price"]))
 
         if(len(sell_filtered_offers) == 0): best_offers[PAYMENT]["sell"] = None
-        else: best_offers[PAYMENT]["sell"] = min(sell_filtered_offers, key=lambda x: float(x["price"]))
+        else: 
+            if(buy_block.get("trade_role") == "taker"):
+                best_offers[PAYMENT]["sell"] = min(sell_filtered_offers, key=lambda x: float(x["price"]))
+            else:
+                best_offers[PAYMENT]["sell"] = max(sell_filtered_offers, key=lambda x: float(x["price"]))
 
 
 
@@ -188,7 +205,7 @@ def processing_data(params:dict)->dict:
                 buy_am = buy_am - buy_am*comission_buy
                 sell_am = sell_am + sell_am*comission_sell
             
-                koef = round((buy_am/sell_am)*100 - 100, 2)
+                koef = round((sell_am/buy_am)*100 - 100, 2)
 
 
                 ceil_data = {
