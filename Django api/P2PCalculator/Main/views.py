@@ -13,6 +13,9 @@ from STPars.processing import processing_data
 def index(request):
     return render(request, 'Main/index.html')
 
+def calculator(request):
+    return render(request, 'Main/calcIndex.html')
+
 
 @csrf_exempt
 def submit_parametrs(request:WSGIRequest):

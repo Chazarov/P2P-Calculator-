@@ -157,27 +157,44 @@ def processing_data(params:dict)->dict:
 
     for PAYMENT in PAYMENTS_LIST:
         try:
-            buy_filtered_offers = list(filter(lambda x: float(x['min_amount']) <= buy_min_amount*exchange, buy_payments[PAYMENT]))
-            sell_filtered_offers = list(filter(lambda x: float(x['min_amount']) <= sell_min_amount*exchange, sell_payments[PAYMENT]))
+            buy_filtered_offers = sorted(list(filter(lambda x: float(x['min_amount']) <= buy_min_amount*exchange, buy_payments[PAYMENT])), key = lambda x: float(x["price"]))
+            sell_filtered_offers = sorted(list(filter(lambda x: float(x['min_amount']) <= sell_min_amount*exchange, sell_payments[PAYMENT])) , key = lambda x: float(x["price"]))
         except Exception as e:
             buy_filtered_offers = []
             sell_filtered_offers = []
 
         if(len(buy_filtered_offers) == 0): best_offers[PAYMENT]["buy"] = None
         else: 
-            if(buy_block.get("trade_role") == "taker"):
-                best_offers[PAYMENT]["buy"] = max(buy_filtered_offers, key=lambda x: float(x["price"]))
+            if(buy_block["trade_role"] == "taker"):
+                best_offers[PAYMENT]["buy"] = buy_filtered_offers[-1]
             else:
-                best_offers[PAYMENT]["buy"] = min(buy_filtered_offers, key=lambda x: float(x["price"]))
+                best_offers[PAYMENT]["buy"] = buy_filtered_offers[0]
+
+
 
         if(len(sell_filtered_offers) == 0): best_offers[PAYMENT]["sell"] = None
         else: 
-            if(buy_block.get("trade_role") == "taker"):
-                best_offers[PAYMENT]["sell"] = min(sell_filtered_offers, key=lambda x: float(x["price"]))
+            if(sell_block["trade_role"] == "taker"):
+                best_offers[PAYMENT]["sell"] = sell_filtered_offers[0]
             else:
-                best_offers[PAYMENT]["sell"] = max(sell_filtered_offers, key=lambda x: float(x["price"]))
+                best_offers[PAYMENT]["sell"] = sell_filtered_offers[-1]
 
 
+        if(best_offers[PAYMENT]["buy"] != None and best_offers[PAYMENT]["sell"] != None):
+            if(buy_block["trade_role"] == "maker"):
+                idx = 1
+                while((float(best_offers[PAYMENT]["buy"]["price"]) - float(best_offers[PAYMENT]["sell"]["price"]) <= 0 and 
+                        (idx < len(buy_filtered_offers)))):
+                    best_offers[PAYMENT]["buy"] = buy_filtered_offers[idx]
+                    idx +=1
+
+            if(sell_block["trade_role"] == "maker"):
+                idx = -2
+                while((float(best_offers[PAYMENT]["sell"]["price"]) - float(best_offers[PAYMENT]["buy"]["price"]) <= 0 and 
+                        (abs(idx) < len(sell_filtered_offers)))):
+                    
+                    best_offers[PAYMENT]["sell"] = sell_filtered_offers[idx]
+                    idx -= 1
 
     
 
@@ -205,7 +222,7 @@ def processing_data(params:dict)->dict:
                 buy_am = buy_am - buy_am*comission_buy
                 sell_am = sell_am + sell_am*comission_sell
             
-                koef = round((sell_am/buy_am)*100 - 100, 2)
+                koef = round((buy_am/sell_am)*100 - 100, 2)
 
 
                 ceil_data = {

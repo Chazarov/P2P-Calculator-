@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор спреда</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/jquery.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+
+    <script src="{% static 'JS/jquery.js' %}"></script>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(89214061, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+    });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/89214061" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+</head>
+<body>
+    <div class="main_container">
+        <header class="header">
+            <div class="top">
+                <a href="https://t.me/SIBTRUST_P2P_BOT" class="top__home-button">
+                    Sibtrust team
+                </a>
+            </div>
+
+            <div class="settings">
+                <div class="top">
+                    <div class="settings__item num_deals">
+                        <span class="item__label">
+                            Кол-во сделок:
+                        </span>
+
+                        <div class="item__field">
+                            <span class="field__label">2</span>
+                            <img src="img/arrow.png" alt="" class="field__select-arrow">
+
+                            <div class="dropdown__num-deals">
+                                <div class="dropdown__item">
+                                    2
+                                </div><div class="dropdown__item">
+                                    3
+                                </div><div class="dropdown__item">
+                                    4
+                                </div><div class="dropdown__item">
+                                    5
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings__item comission-setting">
+                        <span class="item__label">
+                            Комиссии
+                        </span>
+
+                        <div class="item__switch-commission switch--active">
+                            <div class="switch-comission__circle">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom">
+                    <div class="settings__item">
+                        <span class="item__label">
+                            Спред в:
+                        </span>
+                        
+                        <div class="item__switch-view-spread">
+                            <span class="switch-view-spread__label">₽</span>
+                            <div class="switch-view-spread__circle">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings__item trans-amount">
+                        <span class="item__label">
+                            Сумма:
+                        </span>
+
+                        <input type="number" class="item__field sum_input" value="">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="basic__calculations">
+            <div class="percent">
+                <div class="buy_input">
+                    <div class="header">
+                        Покупка
+                    </div>
+
+                    <input type="number" name="" id="" class="buy_price">
+                </div>
+
+                <div class="anothers_input">
+                    
+                </div>
+
+                <div class="sell_input">
+                    <div class="header">
+                        Продажа
+                    </div>
+
+                    <input type="number" name="" id="" class="sell_price">
+                </div>
+
+                <div class="spread_output">
+                    <div class="header">
+                        Спред
+                    </div>
+
+                    <input type="text" name="" id="" class="spread_percent" readonly>
+                </div>
+            </div>
+
+            <div class="comissions">
+                <div class="comission_input">
+                    <div class="header">Комиссия</div>
+                    <input type="number" name="" id="comission_first" value = "0.00">
+    
+                </div>
+
+                <div class="comission_input">
+                    <div class="header">Комиссия</div>
+                    <input type="number" name="" id="comission_last" value = "0.00">
+    
+                </div>
+            </div>
+
+            <div class="profit_fiat">
+                <div class="profit_fiat_input">
+                    <div class="header">Кол-во</div>
+                    <input type="number" name="" id="profit_first" readonly>
+                </div>
+
+                <div class="profit_fiat_input">
+                    <div class="header">Кол-во</div>
+                    <input type="number" name="" id="profit_two" readonly>
+                </div>
+
+                <div class="profit_fiat_input">
+                    <div class="header">Прибыль</div>
+                    <input type="number" name="" id="profit_last" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="button_buf"><button onclick="count()"><span>Вычислить</span></button></div>
+    </div>
+
+    <script src="{% static 'JS/calc.js' %}"></script>
+</body>
+</html>

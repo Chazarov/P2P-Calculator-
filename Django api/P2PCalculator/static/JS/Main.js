@@ -102,7 +102,7 @@ SM_widget.addEventListener('change', () => {
 buy_role_widget.forEach(radio => {
     radio.addEventListener('change', () => {
         buy_role = radio.value;
-        console.log(`Selected id: ${buy_role}`);
+        console.log(`Selected value: ${buy_role}`);
     }); });
 buy_min_amount_widget.addEventListener('change', () => {
     buy_min_amount = buy_min_amount_widget.value;
@@ -114,7 +114,7 @@ buy_min_amount_widget.addEventListener('change', () => {
 sell_role_widget.forEach(radio => {
     radio.addEventListener('change', () => {
         sell_role = radio.value;
-        console.log(`Selected id: ${sell_role}`);
+        console.log(`Selected value: ${sell_role}`);
     }); });
 sell_min_amount_widget.addEventListener('change', () => {
     sell_min_amount = sell_min_amount_widget.value;
