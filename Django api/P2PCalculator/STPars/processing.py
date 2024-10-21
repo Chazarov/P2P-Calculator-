@@ -105,14 +105,17 @@ def check_fields(request):
 def get_current_data():
     r = redis.Redis(host=PREFERENCES.REDIS_HOST, port=6379, db=0, password = os.getenv("REDIS_PASS"))
     stored_data_string = r.get(PREFERENCES.REDIS_SM_DATA_KEY)
+    a = None
     if(stored_data_string):
-        stored_json_data = json.loads(stored_data_string)
+        a = json.loads(stored_data_string)
+    s = 0
     r.close()
-    
-    return stored_json_data
+    return a
 
 
 def processing_data(params:dict)->dict:
+    result_data = {}
+    
     
     if(not check_fields(params)): return None
 
@@ -135,7 +138,9 @@ def processing_data(params:dict)->dict:
 
     pars_data = get_current_data()
 
-
+    if pars_data == None:
+        result_data["ceils"] = None
+        return result_data
 
     buy_payments = None
     sell_payments = None
@@ -201,7 +206,7 @@ def processing_data(params:dict)->dict:
 
 
     count = 0
-    result_data = {}
+    
     ceils = []
     for buy_idx in range(len(PAYMENTS_LIST)):
         for sell_idx in range(len(PAYMENTS_LIST)):
